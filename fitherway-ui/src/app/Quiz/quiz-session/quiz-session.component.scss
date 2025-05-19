@@ -1,0 +1,30 @@
+.heading {
+  height: 100vh;
+  background-color: #FDFAF6;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+}
+.heading h1 {
+  font-size: 2.5rem;
+  color: #a25f55;
+}
+.heading span {
+  font-size: 1.2rem;
+  color: #a25f55;
+}
+.heading button {
+  margin-top: 20px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #FFCFB3;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+// .heading button:hover {
+//   background-color: #e4d9c9;
+// }

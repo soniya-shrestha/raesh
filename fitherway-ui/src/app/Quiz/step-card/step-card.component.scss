@@ -1,0 +1,12 @@
+.step-card button {
+    margin: 10px;
+    padding: 1rem;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .step-card button.selected {
+    background-color: #7f5af0;
+    color: white;
+  }
