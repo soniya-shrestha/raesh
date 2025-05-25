@@ -1,21 +1,229 @@
-.landing-container {
+.landing-page {
+  font-family: 'Segoe UI', sans-serif;
+  color: #a25f55;
+  background-color: #FDFAF6;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff4ee;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  .logo {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #a25f55;
+  }
+
+  .menu-icon {
+    font-size: 1.8rem;
+    background: none;
+    border: none;
+    color: #a25f55;
+    cursor: pointer;
+  }
+}
+
+.side-menu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 260px;
   height: 100vh;
   background-color: #FDFAF6;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+  padding: 2rem 1.5rem;
+  transition: right 0.3s ease;
+  z-index: 200;
+
+  &.open {
+    right: 0;
+  }
+
+  .close-btn {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: #a25f55;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+  }
+
+  ul {
+    list-style: none;
+    padding: 60px 0 0;
+
+    li {
+      padding: 1rem 0;
+      font-size: 1.1rem;
+      color: #a25f55;
+      cursor: pointer;
+
+      &:hover {
+        color: #fe7745;
+      }
+    }
+  }
 }
-.join-btn {
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+  background: linear-gradient(to bottom right, #FFCFB3, #FDFAF6);
+
+  .hero-content {
+    max-width: 600px;
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #a25f55;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      color: #5a3b36;
+    }
+  }
+}
+
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 3rem 2rem;
+  background-color: #fff4ee;
+  gap: 2rem;
+
+  .feature-card {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    max-width: 280px;
+    text-align: center;
+
+    h3 {
+      color: #a25f55;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 0.95rem;
+      color: #555;
+    }
+  }
+}
+
+.join-section {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: #FFCFB3;
+
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #5a3b36;
+  }
+}
+
+.cta-btn {
   padding: 14px 28px;
-  background-color: #FFCFB3;
-  color: #333;
+  background-color: #a25f55;
+  color: #fff;
   border: none;
   border-radius: 10px;
   font-size: 1.2rem;
   cursor: pointer;
   transition: 0.3s ease;
+
+  &:hover {
+    background-color: #fe7745;
+  }
 }
-// .join-btn:hover {
-//   background-color: ;
-// }
+.landing-footer {
+  background-color: #fff4ee;
+  padding: 40px 20px 20px;
+  color: #a25f55;
+  font-size: 0.95rem;
+  margin-top: auto;
+  width: 100%;
+
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+      justify-content: space-between;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .footer-logo {
+      text-align: center;
+
+      h3 {
+        margin-bottom: 10px;
+        font-size: 1.5rem;
+        color: #a25f55;
+      }
+
+      p {
+        max-width: 300px;
+        color: #555;
+      }
+    }
+
+    .footer-links {
+      text-align: center;
+
+      h4 {
+        margin-bottom: 10px;
+        font-size: 1.2rem;
+        color: #a25f55;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+
+        li {
+          margin: 6px 0;
+
+          a {
+            text-decoration: none;
+            color: #fe7745;
+            transition: color 0.3s;
+
+            &:hover {
+              color: #a25f55;
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .footer-bottom {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #888;
+  }
+}

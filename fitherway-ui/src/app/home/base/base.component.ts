@@ -9,7 +9,15 @@ import { Router } from '@angular/router';
 export class BaseComponent {
    constructor(private router: Router) {}
 
+   menuOpen = false;
+
+toggleMenu() {
+  this.menuOpen = !this.menuOpen;
+}
+
   openQuiz() {
     this.router.navigate(['/quiz-session']);
-  }
+  } 
+
+  
 }

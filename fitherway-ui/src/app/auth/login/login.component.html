@@ -1,0 +1,25 @@
+<div class="login-wrapper">
+  <div class="login-card">
+    <h2>Welcome Back</h2>
+    <p>Log in to continue your fitness journey with <strong>FitHerWay</strong></p>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" formControlName="email" placeholder="Enter your email" />
+      </div>
+
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" formControlName="password" placeholder="Enter your password" />
+      </div>
+
+      <button type="submit" class="login-btn" [disabled]="loginForm.invalid">Log In</button>
+    </form>
+
+    <div class="footer-link">
+      <p>Don't have an account? <a (click)="navigateToSignup()">Register now</a></p>
+    </div>
+  </div>
+</div>
+

@@ -1,5 +1,70 @@
-<div class="landing-container">
-  <h1>Welcome to FitHerWay</h1>
-  <button class="join-btn" (click)="openQuiz()">Join Us Now</button>
-</div>
+<div class="landing-page">
+  <header class="header">
+    <div class="logo">FitHerWay</div>
+    <button class="menu-icon" (click)="toggleMenu()">
+      &#9776;
+    </button>
+  </header>
 
+  <!-- Side Menu -->
+  <div class="side-menu" [class.open]="menuOpen">
+    <button class="close-btn" (click)="toggleMenu()">×</button>
+    <ul>
+      <li routerLink="/auth/login">Login</li>
+      <li >About Us</li>
+      <li >Contact Us</li>
+      <li >Privacy Policy</li>
+    </ul>
+  </div>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Empowering Women to Thrive Through Fitness</h1>
+      <p>Your personalized workout journey starts here.</p>
+      <button class="cta-btn" (click)="openQuiz()">Join Us Now</button>
+    </div>
+  </section>
+
+  <section id="features" class="features">
+    <div class="feature-card">
+      <h3>Customized Plans</h3>
+      <p>Workout routines tailored to your fitness level and goals.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Progress Tracking</h3>
+      <p>Visualize your journey with easy progress charts and milestones.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Expert Support</h3>
+      <p>Get guidance and tips designed just for women.</p>
+    </div>
+  </section>
+
+  <section id="join" class="join-section">
+    <h2>Ready to Start Your Transformation?</h2>
+    <button class="cta-btn" (click)="openQuiz()">Take the First Step</button>
+  </section>
+
+  <footer class="landing-footer">
+  <div class="footer-content">
+    <div class="footer-logo">
+      <h3>FitHerWay</h3>
+      <p>Empowering women through fitness, one step at a time.</p>
+    </div>
+
+    <div class="footer-links">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a routerLink="/login">Login</a></li>
+        <li><a routerLink="/about">About Us</a></li>
+        <li><a routerLink="/contact">Contact Us</a></li>
+        <li><a routerLink="/privacy-policy">Privacy Policy</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2025 FitHerWay. All rights reserved.</p>
+  </div>
+</footer>
+</div>

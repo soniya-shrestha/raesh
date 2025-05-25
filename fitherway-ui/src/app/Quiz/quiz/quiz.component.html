@@ -1,22 +1,19 @@
-<div class="quiz-wrapper">  
- 
-   <!-- Top Navigation -->
-<div class="top-progress-wrapper">
-  <!-- Back Button -->
-  <button *ngIf="step > 0" class="back-btn" (click)="prevStep()">&#60;</button>
+<div class="quiz-wrapper">
 
-  <!-- Progress Bar -->
-  <div class="progress-bar">
-    <div
-      class="step"
-      *ngFor="let s of [].constructor(totalSteps); let i = index"
-      [class.active]="i <= step">
+  <!-- Top Navigation -->
+  <div class="top-progress-wrapper">
+    <!-- Back Button -->
+    <button *ngIf="step > 0" class="back-btn" (click)="prevStep()">&#60;</button>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar">
+      <div class="step" *ngFor="let s of [].constructor(totalSteps); let i = index" [class.active]="i <= step">
+      </div>
     </div>
-  </div>
 
-  <!-- Step Counter -->
-  <div class="step-counter">{{ step + 0 }}/{{ totalSteps }}</div>
-</div>
+    <!-- Step Counter -->
+    <div class="step-counter">{{ step + 0 }}/{{ totalSteps }}</div>
+  </div>
 
   <!-- Step 1: Age -->
   <div *ngIf="step === 0" class="step-content">
@@ -34,7 +31,7 @@
       <span>{{ goal.emoji }}</span>
       <strong>{{ goal.label }}</strong>
     </div>
-  </div> 
+  </div>
 
   <div *ngIf="step === 2" class="step-content">
     <h2>Choose your current body shape</h2>
@@ -42,7 +39,7 @@
       <span>{{ shape.emoji }}</span>
       <strong>{{ shape.label }}</strong>
     </div>
-  </div> 
+  </div>
 
   <div *ngIf="step === 3" class="step-content">
     <h2>What is your dream body?</h2>
@@ -50,10 +47,10 @@
       <span>{{ dream.emoji }}</span>
       <strong>{{ dream.label }}</strong>
     </div>
-  </div> 
+  </div>
 
   <!-- Step 3: Experience -->
-   <div *ngIf="step === 4" class="step-content">
+  <div *ngIf="step === 4" class="step-content">
     <h2>Your experience level?</h2>
     <div class="option" *ngFor="let ex of experience" (click)="nextStep(ex)">
       <span>{{ ex.emoji }}</span>
@@ -67,7 +64,7 @@
       <span>{{ exercise.emoji }}</span>
       <strong>{{ exercise.label }}</strong>
     </div>
-  </div> 
+  </div>
 
   <div *ngIf="step === 6" class="step-content">
     <h2>How long ago were you in the best shape of your life?</h2>
@@ -75,125 +72,144 @@
       <span>{{ bestSh.emoji }}</span>
       <strong>{{ bestSh.label }}</strong>
     </div>
-  </div>  
+  </div>
 
   <div *ngIf="step === 7" class="step-content">
     <h2>How often do you want to workout?</h2>
     <div class="option" *ngFor="let preferDay of preferDays" (click)="nextStep(preferDay)">
       <strong>{{ preferDay.label }}</strong>
     </div>
-  </div>  
+  </div>
 
   <div *ngIf="step === 8" class="step-content">
     <h2>How long do you want your workouts to be?</h2>
     <div class="option" *ngFor="let preferTime of preferTimes" (click)="nextStep(preferTime)">
       <strong>{{ preferTime.label }}</strong>
     </div>
-  </div>  
+  </div>
 
   <div *ngIf="step === 9" class="step-content">
     <h2>When did you prefer to workouts?</h2>
-    <div class="option" *ngFor="let preferDayTime of preferDayTimes" (click)="nextStep(preferDayTime)"> 
-       <span>{{ preferDayTime.emoji }}</span>
+    <div class="option" *ngFor="let preferDayTime of preferDayTimes" (click)="nextStep(preferDayTime)">
+      <span>{{ preferDayTime.emoji }}</span>
       <strong>{{ preferDayTime.label }}</strong>
     </div>
-  </div>   
-  
-   <div *ngIf="step === 10" class="step-content">
-    <h2>What equipment do you have available?</h2>
-    <div class="option" *ngFor="let equipment of equipments " (click)="nextStep(equipment)"> 
-      <strong>{{ equipment.label }}</strong> <br>
-      <span>{{ equipment.sublabel }}</span>
-
-    </div>
-  </div>   
-  
-<div  *ngIf="step === 11" class="step-container">
-  <h2 class="step-title">Enter your current weight</h2>
-
-  <div class="toggle-switch">
-    <button 
-      class="toggle-btn" 
-      [class.active]="bmi.weightUnit === 'kg'"
-      (click)="bmi.weightUnit = 'kg'">
-      kg
-    </button>
-    <button 
-      class="toggle-btn" 
-      [class.active]="bmi.weightUnit === 'lb'"
-      (click)="bmi.weightUnit = 'lb'">
-      lb
-    </button>
   </div>
 
+  <div *ngIf="step === 10" class="step-content">
+    <h2>What equipment do you have available?</h2>
+    <div class="option" *ngFor="let equipment of equipments " (click)="nextStep(equipment)">
+      <strong>{{ equipment.label }}</strong> <br>
+      <span>{{ equipment.subtitle }}</span>
+
+    </div>
+  </div> 
+
+<!-- Step 11: Actual Age -->
+<div *ngIf="step === 11" class="step-content">
+  <h2>Enter your actual age</h2>
   <div class="form-row mt-3">
-    <input  
+    <input
+      type="number"
+      min="10"
+      max="99"
+      class="form-control"
+      [(ngModel)]="userData.actualAge"
+      placeholder="Age"
+    />
+  </div>
+  <div class="text-danger" *ngIf="!isActualAgeValid() && userData.actualAge">
+    Age must be between 10 and 99.
+  </div>
+  <button class="btn next-btn" [disabled]="!isActualAgeValid()" (click)="nextStep()">Next</button>
+</div>
+
+<!-- Step 12: Weight -->
+<div *ngIf="step === 12" class="step-content">
+  <h2>Enter your current weight</h2>
+  <div class="toggle-switch">
+    <button class="toggle-btn" [class.active]="bmi.weightUnit === 'kg'" (click)="bmi.weightUnit = 'kg'">kg</button>
+    <button class="toggle-btn" [class.active]="bmi.weightUnit === 'lb'" (click)="bmi.weightUnit = 'lb'">lb</button>
+  </div>
+  <div class="form-row mt-3">
+    <input
+      type="number"
+      min="20"
+      max="300"
       class="form-control"
       [(ngModel)]="bmi.weight"
-      [placeholder]=" ''+ bmi.weightUnit">
+      (focus)="onInputFocus()"
+      (blur)="onInputBlur()"
+      [placeholder]="'' + bmi.weightUnit"
+    />
   </div>
-
-  <button class="btn next-btn" (click)="nextStep()">Next</button>
+  <div class="text-danger" *ngIf="!isWeightValid() && bmi.weight">Invalid weight entered.</div>
+  <div class="bmi-info-card" *ngIf="showBmiInfo">
+    <h3>Calculating your BMI</h3>
+    <p>BMI is used to estimate risk levels of potential health issues.</p>
+  </div>
+  <button class="btn next-btn" [disabled]="!isWeightValid()" (click)="nextStep()">Next</button>
 </div>
 
-
-
-<div *ngIf="step === 12" class="step-container">
-  <h2 class="step-title">Enter your current height</h2>
-  
-  <div class="toggle-switch">
-    <button 
-      class="toggle-btn" 
-      [class.active]="bmi.heightUnit === 'cm'"
-      (click)="bmi.heightUnit = 'cm'">
-      cm
-    </button>
-    <button 
-      class="toggle-btn" 
-      [class.active]="bmi.heightUnit === 'ft'"
-      (click)="bmi.heightUnit = 'ft'">
-      ft/in
-    </button>
-  </div>
-
-  <div class="form-row mt-3" *ngIf="bmi.heightUnit === 'cm'">
-    <input  class="form-control" [(ngModel)]="bmi.height" placeholder="Height in cm">
-  </div>
-
-  <div class="form-row inline-inputs mt-3" *ngIf="bmi.heightUnit === 'ft'">
-    <input  class="form-control me-2" [(ngModel)]="bmi.heightFeet" placeholder="ft">
-    <input  class="form-control" [(ngModel)]="bmi.heightInch" placeholder="in">
-  </div>
-
-  <button class="btn next-btn" (click)="nextStep()">Next</button>
-</div>
-
-
-
-
- 
-<!-- Step 13: Summary Card -->
+<!-- Step 13: Height -->
 <div *ngIf="step === 13" class="step-content">
-  <h2>Your Fitness Summary</h2>
-
-  <div class="summary-card">
-    <p><strong>Age:</strong> {{ userData.age }}</p>
-    <p><strong>Goal:</strong> {{ userData.goal }}</p>
-    <p><strong>Experience:</strong> {{ userData.experience }}</p>
-    <p><strong>Weight:</strong> {{ bmi.weight }} {{ bmi.weightUnit }}</p>
-    <p><strong>Height:</strong> {{ bmi.height }} {{ bmi.heightUnit }}</p>
-    <p><strong>BMI:</strong> {{ bmi.result }}</p>
-
-    <div class="bmi-indicator" [ngClass]="bmiLevel">
-      <span *ngIf="bmiLevel === 'underweight'">Underweight</span>
-      <span *ngIf="bmiLevel === 'healthy'">Healthy</span>
-      <span *ngIf="bmiLevel === 'overweight'">Overweight</span>
-      <span *ngIf="bmiLevel === 'obese'">Obese</span>
-    </div>
+  <h2>Enter your current height</h2>
+  <div class="toggle-switch">
+    <button class="toggle-btn" [class.active]="bmi.heightUnit === 'cm'" (click)="bmi.heightUnit = 'cm'">cm</button>
+    <button class="toggle-btn" [class.active]="bmi.heightUnit === 'ft'" (click)="bmi.heightUnit = 'ft'">ft/in</button>
   </div>
-
-  <button class="submit-btn" (click)="submitForm()">Finish</button>
+  <div class="form-row mt-3" *ngIf="bmi.heightUnit === 'cm'">
+    <input type="number" class="form-control" [(ngModel)]="bmi.height" placeholder="cm" (focus)="onInputFocus()" (blur)="onInputBlur()" />
+  </div>
+  <div class="form-row inline-inputs mt-3" *ngIf="bmi.heightUnit === 'ft'">
+    <input type="number" class="form-control me-2" [(ngModel)]="bmi.heightFeet" placeholder="ft" (focus)="onInputFocus()" (blur)="onInputBlur()" />
+    <input type="number" class="form-control" [(ngModel)]="bmi.heightInch" placeholder="in" (focus)="onInputFocus()" (blur)="onInputBlur()" />
+  </div>
+  <div class="text-danger" *ngIf="!isHeightValid() && (bmi.height || bmi.heightFeet)">Invalid height entered.</div>
+  <div class="bmi-info-card" *ngIf="showBmiInfo">
+    <h3>Calculating your BMI</h3>
+    <p>This is used to calculate your body mass index (BMI).</p>
+  </div>
+  <button class="btn next-btn" [disabled]="!isHeightValid()" (click)="calculateBMI()">Next</button>
 </div>
+
+<!-- Step 14: BMI Summary -->
+<div *ngIf="step === 14" class="step-content">
+  <h2>Your Fitness Profile</h2>
+  <div class="summary-card">
+    <div class="summary-title">
+      <h3>Body Mass Index (BMI)</h3>
+    </div>
+    <div class="bmi-indicator-container" *ngIf="showBmiResult">
+      <div class="bmi-indicator-bar">
+        <div class="bmi-marker" [ngStyle]="{'left': getBmiPosition() + '%'}"></div>
+        <div class="bmi-labels">
+          <span>Underweight</span>
+          <span>Healthy</span>
+          <span>Overweight</span>
+          <span>Obese</span>
+        </div>
+      </div>
+      <div class="summary">
+        <p><strong>Age:</strong> {{ userData.actualAge }}</p>
+        <p><strong>Goal:</strong> {{ userData.goal }}</p>
+        <p><strong>Experience:</strong> {{ userData.experience }}</p>
+        <p><strong>Weight:</strong> {{ bmi.weight }} {{ bmi.weightUnit }}</p>
+        <p><strong>Height:</strong> {{ getFormattedHeight() }}</p>
+        <p><strong>BMI:</strong> {{ bmi.result }}</p>
+      </div>
+    </div>
+    <div class="bmi-message-card">
+      <p>{{ bmiMessage }}</p>
+    </div>
+    <button class="submit-btn" (click)="submitForm()">Finish</button>
+  </div>
+</div>
+
+
+
+
+
+
+
  
-</div>
-

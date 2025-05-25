@@ -11,7 +11,13 @@ const routes: Routes = [
     path: 'quiz',
     loadChildren: () =>
       import('./Quiz/quiz.module').then((m) => m.QuizModule)
-  }
+  },
+
+  {
+    path: 'auth',
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
+   // canActivate: [negateAuthGuard],
+  },
 ];
 
 @NgModule({

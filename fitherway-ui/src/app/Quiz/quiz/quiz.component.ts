@@ -1,198 +1,168 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { QuizService } from '../service/quiz.service';
 
 @Component({
   selector: 'app-quiz',
   templateUrl: './quiz.component.html',
   styleUrls: ['./quiz.component.scss']
 })
-export class QuizComponent {
+export class QuizComponent implements OnInit{
+ constructor(private quizService: QuizService) {}
+step = 0;
+  totalSteps = 14;
 
-  step = 0;
-  totalSteps = 13; 
- 
- bmi = {
-  weight: null as number | null,
-  weightUnit: 'kg',
-  height: null as number | null,
-  heightFeet: null as number | null,
-  heightInch: null as number | null,
-  heightUnit: 'cm',
-  result: null as number | null
-};
+  goals: any[] = [];
+  experience: any[] = [];
+  ages: any[] = [];
+  shapes: any[] = [];
+  dreams: any[] = [];
+  exercises: any[] = [];
+  bestShape: any[] = [];
+  preferDays: any[] = [];
+  preferTimes: any[] = [];
+  preferDayTimes: any[] = [];
+  equipments: any[] = [];
+
+  userData: any = {
+    actualAge: '',
+    goal: '',
+    experience: '',
+    bmi: '',
+    ageGroup:'',
+    shape:'',
+    dream:'',
+    exercise:'',
+    bestShape:'',
+    preferDays:'',
+    preferTimes:'',
+    preferDayTimes:'',
+    equipments:''
+  };
+
+  bmi: any = {
+    weight: '',
+    weightUnit: 'kg',
+    height: '',
+    heightFeet: '',
+    heightInch: '',
+    heightUnit: 'cm',
+    result: ''
+  };
 
   bmiLevel: string = '';
-  userData: any = {};
+  bmiMessage: string = '';
+  showBmiResult: boolean = false;
+  showBmiInfo: boolean = false;
 
-  goals = [
-    { label: 'Lose weight', emoji: '🔥' },
-    { label: 'Build Muscle', emoji: '💪' },
-    { label: 'General Fitness', emoji: '🧘‍♀️' }
-  ];
+  ngOnInit(): void {
+    this.loadQuizOptions();
+  }
 
-  experience = [
-    { label: 'Beginner', emoji: '🌱' },
-    { label: 'Intermediate', emoji: '🌿' },
-    { label: 'Advanced', emoji: '🌳' }
-  ];
+  loadQuizOptions() {
+    this.quizService.getGoals().subscribe(data => this.goals = data);
+    this.quizService.getExperience().subscribe(data => this.experience = data);
+    this.quizService.getAges().subscribe(data => this.ages = data);
+    this.quizService.getShapes().subscribe(data => this.shapes = data);
+    this.quizService.getDreams().subscribe(data => this.dreams = data);
+    this.quizService.getExercises().subscribe(data => this.exercises = data);
+    this.quizService.getBestShapes().subscribe(data => this.bestShape = data);
+    this.quizService.getPreferDays().subscribe(data => this.preferDays = data);
+    this.quizService.getPreferTimes().subscribe(data => this.preferTimes = data);
+    this.quizService.getPreferDayTimes().subscribe(data => this.preferDayTimes = data);
+    this.quizService.getEquipments().subscribe(data => this.equipments = data);
+  }
 
-  ages = [
-    { label: '18-29', emoji: '🧒' },
-    { label: '30-39', emoji: '👩' },
-    { label: '40-49', emoji: '👩‍🦳' },
-    { label: '50+', emoji: '👵' }
-  ];
+  nextStep(value?: any) {
+    if (this.step === 1) this.userData.goal = value?.label;
+    if (this.step === 4) this.userData.experience = value?.label;
 
-  shapes = [
-    { label: 'Slim', emoji: '' },
-    { label: 'Average', emoji: '' },
-    { label: 'Heavy', emoji: '' }
-  ];
-
-  dreams = [
-    { label: 'Fit', emoji: '' },
-    { label: 'Muscular', emoji: '' },
-    { label: 'Bodybuilding', emoji: '' }
-  ];
-
-  exercises = [
-    { label: 'Daily', emoji: '' },
-    { label: 'Several times per week', emoji: '' },
-    { label: 'Several times per month', emoji: '' },
-    { label: 'In the past', emoji: '' },
-    { label: 'Never', emoji: '' }
-  ];
-
-  bestShape = [
-    { label: 'Less than a year ago', emoji: '' },
-    { label: '1 to 3 years ago' },
-    { label: 'More than 3 years ago' },
-    { label: 'Never' }
-  ];
-
-  preferDays = [
-    { label: '1 x per week' },
-    { label: '2 x per week' },
-    { label: '3 x per week' },
-    { label: '4 x per week' },
-    { label: '5 x per week' },
-    { label: '6 x per week' }
-  ];
-
-  preferTimes = [
-    { label: '30 min' },
-    { label: '40 min' },
-    { label: '60 min' }
-  ];
-
-  preferDayTimes = [
-    { label: 'Morning', emoji: '🕖' },
-    { label: 'Afternoon', emoji: '🕒' },
-    { label: 'Evening', emoji: '🕕' },
-    { label: 'At different times', emoji: '🕖 🕒 🕕' }
-  ];
-
-  equipments = [
-    {
-      label: 'Bodyweight Only',
-      sublabel: 'Work out anywhere without equipment'
-    },
-    {
-      label: 'Minimal Equipment',
-      sublabel: 'Dumbbells, pull-up bar & resistance bands'
-    },
-    {
-      label: 'Home Gym',
-      sublabel: 'Barbell, squat rack, bench, dumbbells & pull-up bar'
-    }
-  ];
-
-  nextStep(selection?: any) {
-    switch (this.step) {
-      case 0: this.userData.age = selection.label; break;
-      case 1: this.userData.goal = selection.label; break;
-      case 2: this.userData.shape = selection.label; break;
-      case 3: this.userData.dream = selection.label; break;
-      case 4: this.userData.experience = selection.label; break;
-      case 5: this.userData.exercise = selection.label; break;
-      case 6: this.userData.bestShape = selection.label; break;
-      case 7: this.userData.preferDays = selection.label; break;
-      case 8: this.userData.preferTimes = selection.label; break;
-      case 9: this.userData.preferDayTimes = selection.label; break;
-      case 10: this.userData.equipment = selection.label; break;
-      // Step 11: weight (manual input)
-      // Step 12: height (manual input)
-    }
     this.step++;
   }
 
   prevStep() {
-    if (this.step > 0) {
-      this.step--;
+    this.step--;
+  }
+
+  isActualAgeValid(): boolean {
+    const age = Number(this.userData.actualAge);
+    return age >= 10 && age <= 99;
+  }
+
+  isWeightValid(): boolean {
+    const weight = parseFloat(this.bmi.weight);
+    return weight > 20 && weight < 300;
+  }
+
+  isHeightValid(): boolean {
+    if (this.bmi.heightUnit === 'cm') {
+      const height = parseFloat(this.bmi.height);
+      return height >= 90 && height <= 250;
+    } else {
+      const feet = parseInt(this.bmi.heightFeet);
+      const inch = parseInt(this.bmi.heightInch);
+      return feet >= 3 && feet <= 8 && inch >= 0 && inch < 12;
     }
   }
 
- calculateBMI() {
-  let weight = this.bmi.weight;
-  let height: number | null = null;
-
-  // Validate weight input
-  if (weight == null) {
-    alert('Please enter your weight.');
-    return;
+  onInputFocus() {
+    this.showBmiInfo = true;
   }
 
-  // Convert weight if in lb
-  if (this.bmi.weightUnit === 'lb') {
-    weight = weight * 0.453592;
+  onInputBlur() {
+    this.showBmiInfo = false;
   }
 
-  // Convert and validate height
-  if (this.bmi.heightUnit === 'cm') {
-    if (this.bmi.height == null) {
-      alert('Please enter your height in cm.');
-      return;
-    }
-    height = this.bmi.height / 100;
-  } else if (this.bmi.heightUnit === 'ft') {
-    const ft = this.bmi.heightFeet || 0;
-    const inch = this.bmi.heightInch || 0;
+  calculateBMI() {
+    if (!this.isHeightValid()) return;
 
-    if (ft === 0 && inch === 0) {
-      alert('Please enter your height in ft/in.');
-      return;
-    }
+    const payload = {
+      weight: this.bmi.weight,
+      weightUnit: this.bmi.weightUnit,
+      height: this.bmi.height,
+      heightFeet: this.bmi.heightFeet,
+      heightInch: this.bmi.heightInch,
+      heightUnit: this.bmi.heightUnit
+    };
 
-    height = (ft * 12 + inch) * 0.0254;
+    this.quizService.calculateBMI(payload).subscribe({
+      next: (response) => {
+        this.bmi.result = response.bmi;
+        this.bmiLevel = response.level;
+        this.bmiMessage = response.message;
+        this.showBmiResult = true;
+        this.userData.bmi = this.bmi.result;
+        this.nextStep();
+      },
+      error: (err) => {
+        alert('Failed to calculate BMI.');
+        console.error(err);
+      }
+    });
   }
 
-  // Final validation
-  if (height === 0 || height == null) {
-    alert('Height must be greater than zero.');
-    return;
+  getFormattedHeight(): string {
+    return this.bmi.heightUnit === 'cm'
+      ? `${this.bmi.height} cm`
+      : `${this.bmi.heightFeet} ft ${this.bmi.heightInch} in`;
   }
 
-  // Calculate BMI
-  const bmiValue = weight! / (height * height);
-  this.bmi.result = parseFloat(bmiValue.toFixed(1));
-  this.userData.bmi = this.bmi.result;
-
-  // Determine BMI category
-  if (bmiValue < 18.5) {
-    this.bmiLevel = 'underweight';
-  } else if (bmiValue >= 18.5 && bmiValue < 24.9) {
-    this.bmiLevel = 'healthy';
-  } else if (bmiValue  >= 24.9 && bmiValue < 30) {
-    this.bmiLevel = 'overweight';
-  } else {
-    this.bmiLevel = 'obese';
+  getBmiPosition(): number {
+    const bmi = parseFloat(this.bmi.result);
+    if (isNaN(bmi)) return 0;
+    if (bmi < 18.5) return 15;
+    if (bmi < 25) return 35;
+    if (bmi < 30) return 65;
+    return 90;
   }
-
-  this.nextStep();
-}
-
 
   submitForm() {
-    console.log('User Data:', this.userData);
-    alert('🎉 Thank you for completing the quiz!');
+    console.log('Submitting user data:', this.userData);
+    this.quizService.submitQuizResponse(this.userData).subscribe({
+      next: () => alert('🎉 Thank you for completing the quiz!'),
+      error: (err) => {
+        alert('Something went wrong during submission.');
+        console.error(err);
+      }
+    });
   }
 }
