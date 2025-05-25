@@ -1,0 +1,27 @@
+server:
+  port: 8483
+  address: 0.0.0.0
+  servlet:
+    context-path: /fitherway-service
+  base-url: http://localhost:8483/fitherway-service/api
+
+spring:
+  application:
+    name: fitherway
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/fitherway
+    username: postgres
+    password: root
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    show_sql: true
+    hibernate:
+      ddl-auto: update
+    defer-datasource-initialization: true
+
+  jwt:
+     secret: your-very-secret-key-your-very-secret-key
+     expiration: 36000000 # 10 hours in milliseconds
+
