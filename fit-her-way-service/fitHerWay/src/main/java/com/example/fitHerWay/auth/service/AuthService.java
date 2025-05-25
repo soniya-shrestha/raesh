@@ -7,6 +7,7 @@ import com.example.fitHerWay.auth.dto.RegisterRequest;
 
 public interface AuthService {
     JwtResponse register(RegisterRequest request);
+
     JwtResponse login(LoginRequest request);
 }
 

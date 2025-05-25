@@ -18,8 +18,8 @@ public class JwtService {
 
     public JwtService(JwtProperties jwtProperties) {
         this.jwtProperties = jwtProperties;
+        System.out.println(">>> JWT Secret loaded: " + jwtProperties.getSecret());
     }
-
 
     // Generate signing key from secret
     private Key getSignInKey() {

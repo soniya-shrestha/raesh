@@ -3,7 +3,7 @@ server:
   address: 0.0.0.0
   servlet:
     context-path: /fitherway-service
-  base-url: http://localhost:8483/fitherway-service/api
+    base-url: http://localhost:8483/fitherway-service/api
 
 spring:
   application:
@@ -21,7 +21,6 @@ spring:
       ddl-auto: update
     defer-datasource-initialization: true
 
-  jwt:
-     secret: your-very-secret-key-your-very-secret-key
-     expiration: 36000000 # 10 hours in milliseconds
-
+jwt:
+  secret: your-very-secret-key-your-very-secret-key
+  expiration: 36000000
