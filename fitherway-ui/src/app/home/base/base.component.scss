@@ -16,9 +16,10 @@
   z-index: 100;
 
   .logo {
-    font-size: 1.6rem;
-    font-weight: bold;
+    font-size: 1.8rem;
+    font-weight: 700;
     color: #a25f55;
+    letter-spacing: 1px;
   }
 
   .menu-icon {
@@ -66,6 +67,14 @@
       font-size: 1.1rem;
       color: #a25f55;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
 
       &:hover {
         color: #fe7745;
@@ -84,11 +93,13 @@
 
   .hero-content {
     max-width: 600px;
+    animation: fadeInUp 1s ease-out;
 
     h1 {
-      font-size: 2.5rem;
+      font-size: 2.8rem;
       margin-bottom: 1rem;
       color: #a25f55;
+      font-weight: 700;
     }
 
     p {
@@ -109,11 +120,12 @@
 
   .feature-card {
     background: #fff;
-    padding: 1.5rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    padding: 2rem 1.5rem;
+    border-radius: 16px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.06);
     max-width: 280px;
     text-align: center;
+    transition: transform 0.3s;
 
     h3 {
       color: #a25f55;
@@ -123,6 +135,10 @@
     p {
       font-size: 0.95rem;
       color: #555;
+    }
+
+    &:hover {
+      transform: translateY(-5px);
     }
   }
 }
@@ -140,26 +156,28 @@
 }
 
 .cta-btn {
-  padding: 14px 28px;
+  padding: 14px 32px;
   background-color: #a25f55;
   color: #fff;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
   font-size: 1.2rem;
   cursor: pointer;
-  transition: 0.3s ease;
+  transition: background 0.3s ease, transform 0.3s;
 
   &:hover {
     background-color: #fe7745;
+    transform: scale(1.05);
   }
 }
+
 .landing-footer {
   background-color: #fff4ee;
-  padding: 40px 20px 20px;
   color: #a25f55;
   font-size: 0.95rem;
   margin-top: auto;
   width: 100%;
+  padding: 2rem 1rem;
 
   .footer-content {
     display: flex;
@@ -204,6 +222,9 @@
 
         li {
           margin: 6px 0;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
 
           a {
             text-decoration: none;
@@ -226,4 +247,19 @@
     font-size: 0.85rem;
     color: #888;
   }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeInUp 1s ease-out;
 }

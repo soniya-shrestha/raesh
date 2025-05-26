@@ -110,7 +110,7 @@
   <h2>Enter your actual age</h2>
   <div class="form-row mt-3">
     <input
-      type="number"
+      
       min="10"
       max="99"
       class="form-control"
@@ -118,9 +118,9 @@
       placeholder="Age"
     />
   </div>
-  <div class="text-danger" *ngIf="!isActualAgeValid() && userData.actualAge">
+  <!-- <div class="text-danger"  *ngIf="!isActualAgeValid() && userData.actualAge">
     Age must be between 10 and 99.
-  </div>
+  </div> -->
   <button class="btn next-btn" [disabled]="!isActualAgeValid()" (click)="nextStep()">Next</button>
 </div>
 
@@ -139,7 +139,6 @@
       class="form-control"
       [(ngModel)]="bmi.weight"
       (focus)="onInputFocus()"
-      (blur)="onInputBlur()"
       [placeholder]="'' + bmi.weightUnit"
     />
   </div>
@@ -148,7 +147,7 @@
     <h3>Calculating your BMI</h3>
     <p>BMI is used to estimate risk levels of potential health issues.</p>
   </div>
-  <button class="btn next-btn" [disabled]="!isWeightValid()" (click)="nextStep()">Next</button>
+  <button class="btn next-btn" (blur)="onInputBlur()" [disabled]="!isWeightValid()" (click)="nextStep()">Next</button>
 </div>
 
 <!-- Step 13: Height -->
@@ -159,18 +158,18 @@
     <button class="toggle-btn" [class.active]="bmi.heightUnit === 'ft'" (click)="bmi.heightUnit = 'ft'">ft/in</button>
   </div>
   <div class="form-row mt-3" *ngIf="bmi.heightUnit === 'cm'">
-    <input type="number" class="form-control" [(ngModel)]="bmi.height" placeholder="cm" (focus)="onInputFocus()" (blur)="onInputBlur()" />
+    <input type="number" class="form-control" [(ngModel)]="bmi.height" placeholder="cm" (focus)="onInputFocus()"  />
   </div>
   <div class="form-row inline-inputs mt-3" *ngIf="bmi.heightUnit === 'ft'">
-    <input type="number" class="form-control me-2" [(ngModel)]="bmi.heightFeet" placeholder="ft" (focus)="onInputFocus()" (blur)="onInputBlur()" />
-    <input type="number" class="form-control" [(ngModel)]="bmi.heightInch" placeholder="in" (focus)="onInputFocus()" (blur)="onInputBlur()" />
+    <input type="number" class="form-control me-2" [(ngModel)]="bmi.heightFeet" placeholder="ft" (focus)="onInputFocus()"  />
+    <input type="number" class="form-control" [(ngModel)]="bmi.heightInch" placeholder="in" (focus)="onInputFocus()"  />
   </div>
   <div class="text-danger" *ngIf="!isHeightValid() && (bmi.height || bmi.heightFeet)">Invalid height entered.</div>
   <div class="bmi-info-card" *ngIf="showBmiInfo">
     <h3>Calculating your BMI</h3>
-    <p>This is used to calculate your body mass index (BMI).</p>
+    <p>BMI is used to estimate risk levels of potential health issues.</p>
   </div>
-  <button class="btn next-btn" [disabled]="!isHeightValid()" (click)="calculateBMI()">Next</button>
+  <button class="btn next-btn" (blur)="onInputBlur()" [disabled]="!isHeightValid()" (click)="calculateBMI()">Next</button>
 </div>
 
 <!-- Step 14: BMI Summary -->

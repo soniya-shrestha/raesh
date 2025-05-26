@@ -1,1 +1,22 @@
-<p>otp-validation works!</p>
+<div class="otp-wrapper">
+  <div class="otp-card">
+    <h2>Enter the 6-digit code</h2>
+    <p>We’ve sent a verification code to your email</p>
+
+    <div class="otp-inputs">
+      <input type="text" maxlength="1" *ngFor="let box of otpArray; let i = index"
+             [(ngModel)]="otpValues[i]" (input)="moveToNext(i, $event)" />
+    </div>
+
+    <div class="message">
+      <p>If you don't see a code in your inbox, check your spam folder.</p>
+    </div>
+
+    <div class="text-center">
+      <p *ngIf="remainingTime > 0">OTP will expire in: <b>{{ formatTime(remainingTime) }}</b></p>
+      <p *ngIf="remainingTime <= 0" class="error-text">OTP has expired</p>
+    </div>
+
+    <button class="login-btn" [disabled]="remainingTime <= 0">Verify OTP</button>
+  </div>
+</div>

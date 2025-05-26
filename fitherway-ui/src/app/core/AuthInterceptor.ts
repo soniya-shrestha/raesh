@@ -11,14 +11,12 @@ export class AuthInterceptor implements HttpInterceptor {
 
   constructor( private router: Router) {}
 
-  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    // const token = localStorage.getItem('access_token'); 
-        let token: string | null = null;
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> { 
+  //     if (request.url.includes('/api/quiz/submit')) {
+  //   return next.handle(request);  // send request as-is, no token
+  // }
+     const token = localStorage.getItem('access_token'); 
 
-
-     if (typeof window !== 'undefined') {
-      token = localStorage.getItem('access_token');
-    }
     if (token) {
       request = this.addToken(request, token);
     }

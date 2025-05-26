@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { QuizService } from '../service/quiz.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-quiz',
@@ -7,7 +8,7 @@ import { QuizService } from '../service/quiz.service';
   styleUrls: ['./quiz.component.scss']
 })
 export class QuizComponent implements OnInit{
- constructor(private quizService: QuizService) {}
+ constructor(private quizService: QuizService, private route: Router) {}
 step = 0;
   totalSteps = 14;
 
@@ -27,16 +28,15 @@ step = 0;
     actualAge: '',
     goal: '',
     experience: '',
-    bmi: '',
-    ageGroup:'',
+    bmi: '', 
+    equipment:'',
     shape:'',
     dream:'',
     exercise:'',
     bestShape:'',
-    preferDays:'',
-    preferTimes:'',
-    preferDayTimes:'',
-    equipments:''
+    preferDay:'',
+    preferTime:'',
+    preferDayTime:''  
   };
 
   bmi: any = {
@@ -73,8 +73,20 @@ step = 0;
   }
 
   nextStep(value?: any) {
-    if (this.step === 1) this.userData.goal = value?.label;
-    if (this.step === 4) this.userData.experience = value?.label;
+    if (this.step === 1) this.userData.goal = value?.label; 
+    if (this.step === 2) this.userData.shape = value?.label; 
+    if (this.step === 3) this.userData.dream = value?.label; 
+    if (this.step === 4) this.userData.experience = value?.label;  
+    if (this.step === 5) this.userData.exercise = value?.label; 
+    if (this.step === 6) this.userData.bestShape = value?.label; 
+    if (this.step === 7) this.userData.preferDay = value?.label; 
+    if (this.step === 8) this.userData.preferTime = value?.label; 
+    if (this.step === 9) this.userData.preferDayTime = value?.label;   
+    if (this.step === 10) this.userData.equipment = value?.label; 
+
+
+
+
 
     this.step++;
   }
@@ -158,7 +170,9 @@ step = 0;
   submitForm() {
     console.log('Submitting user data:', this.userData);
     this.quizService.submitQuizResponse(this.userData).subscribe({
-      next: () => alert('🎉 Thank you for completing the quiz!'),
+      next: () => {
+        this.route.navigate(['/auth/register']);
+      },
       error: (err) => {
         alert('Something went wrong during submission.');
         console.error(err);

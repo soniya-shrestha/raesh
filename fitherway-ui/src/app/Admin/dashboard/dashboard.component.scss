@@ -1,0 +1,12 @@
+.admin-container {
+  height: 100vh;
+  mat-sidenav {
+    width: 240px;
+    background-color: #a25f55;
+    color: #fff;
+  }
+  mat-sidenav-content {
+    padding: 2rem;
+    background: #FDFAF6;
+  }
+}

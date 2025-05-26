@@ -7,11 +7,16 @@ import { BaseComponent } from './home/base/base.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AuthInterceptor } from './core/AuthInterceptor';
+import { DashboardComponent } from './Admin/dashboard/dashboard.component';
+import { UserManagementComponent } from './Admin/user-management/user-management.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BaseComponent,
+    DashboardComponent,
+    UserManagementComponent
+
    
   ],
   imports: [
