@@ -1,14 +1,16 @@
 package com.example.fitHerWay.quizsurvey.entity;
 
-import com.example.fitHerWay.quizsurvey.entity.*;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDateTime;
 
-@Entity
+@RequiredArgsConstructor
 @Data
+@Entity
 public class UserQuizResponse {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

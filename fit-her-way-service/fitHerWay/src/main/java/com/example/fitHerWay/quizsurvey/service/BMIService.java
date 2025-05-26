@@ -59,4 +59,25 @@ public class BMIService {
 
         return new BMICalculationResponse(roundedBmi, level, message);
     }
+
+    public BMICalculationResponse getBMIResponse(double bmi) {
+        String level;
+        String message;
+        if (bmi < 18.5) {
+            level = "underweight";
+            message = "Your BMI is " + bmi + ", which is considered underweight. Let's work on improving your health with a personalized plan.";
+        } else if (bmi < 24.9) {
+            level = "healthy";
+            message = "Your BMI is " + bmi + ", which is considered normal. You are doing a great job. We will tailor a personal plan for your needs.";
+        } else if (bmi < 30) {
+            level = "overweight";
+            message = "Your BMI is " + bmi + ", which is considered overweight. A custom plan will help you achieve a healthy weight.";
+        } else {
+            level = "obese";
+            message = "Your BMI is " + bmi + ", which falls in the obese range. Let’s build a plan to help you reach a healthier range.";
+        }
+
+        return new BMICalculationResponse(bmi, level, message);
+    }
+
 }

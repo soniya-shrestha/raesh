@@ -2,6 +2,7 @@ package com.example.fitHerWay.quizsurvey.controller;
 
 import com.example.fitHerWay.quizsurvey.dto.BMICalculationRequest;
 import com.example.fitHerWay.quizsurvey.dto.BMICalculationResponse;
+import com.example.fitHerWay.quizsurvey.dto.UserQuizRequest;
 import com.example.fitHerWay.quizsurvey.entity.UserQuizResponse;
 import com.example.fitHerWay.quizsurvey.entity.*;
 import com.example.fitHerWay.quizsurvey.repository.*;
@@ -30,6 +31,7 @@ public class QuizController {
     private final PreferDayTimeRepository preferDayTimeRepo;
     private final EquipmentRepository equipmentRepo;
     private final UserQuizResponseRepository userResponseRepo;
+
 
     public QuizController(GoalRepository goalRepo,
                           ExperienceRepository experienceRepo,
@@ -115,11 +117,56 @@ public class QuizController {
     }
 
     @PostMapping("/submit")
-    public ResponseEntity<UserQuizResponse> submitQuizResponse(@RequestBody UserQuizResponse userResponse) {
+    public ResponseEntity<UserQuizResponse> submitQuizResponse(@RequestBody UserQuizRequest userResponse) {
         System.out.println("Received quiz submission: " + userResponse);
+        UserQuizResponse userQuizResponse = new UserQuizResponse();
+        userQuizResponse.setActualAge(userResponse.getActualAge());
 
-        userResponse.setCreatedAt(LocalDateTime.now());
-        UserQuizResponse saved = userResponseRepo.save(userResponse);
+        Goal goal = goalRepo.findByLabel(userResponse.getGoal())
+                .orElseThrow(() -> new RuntimeException("Goal not found: " + userResponse.getGoal()));
+        userQuizResponse.setGoal(goal);
+
+        Experience experience = experienceRepo.findByLabel(userResponse.getExperience())
+                .orElseThrow(() -> new RuntimeException("Experience not found: " + userResponse.getExperience()));
+        userQuizResponse.setExperience(experience);
+
+        Equipment equipment = equipmentRepo.findByLabel(userResponse.getEquipment())
+                .orElseThrow(() -> new RuntimeException("Equipment not found: " + userResponse.getEquipment()));
+        userQuizResponse.setEquipment(equipment);
+
+        Dream dream = dreamRepo.findByLabel(userResponse.getDream())
+                .orElseThrow(() -> new RuntimeException("Dream not found: " + userResponse.getDream()));
+        userQuizResponse.setDream(dream);
+
+        Shape shape = shapeRepo.findByLabel(userResponse.getShape())
+                .orElseThrow(() -> new RuntimeException("Shape not found: " + userResponse.getShape()));
+        userQuizResponse.setShape(shape);
+
+        BestShape bestShape = bestShapeRepo.findByLabel(userResponse.getBestShape())
+                .orElseThrow(() -> new RuntimeException(" Best Shape not found: " + userResponse.getBestShape()));
+        userQuizResponse.setBestShape(bestShape);
+
+        PreferDay preferDay = preferDayRepo.findByLabel(userResponse.getPreferDay())
+                .orElseThrow(() -> new RuntimeException("Prefer day not found: " + userResponse.getPreferDay()));
+        userQuizResponse.setPreferDay(preferDay);
+
+        PreferDayTime preferDayTime = preferDayTimeRepo.findByLabel(userResponse.getPreferDayTime())
+                .orElseThrow(() -> new RuntimeException("Prefer day time not found: " + userResponse.getPreferDayTime()));
+        userQuizResponse.setPreferDayTime(preferDayTime);
+
+        PreferTime preferTime = preferTimeRepo.findByLabel(userResponse.getPreferTime())
+                .orElseThrow(() -> new RuntimeException("Prefer time not found: " + userResponse.getPreferTime()));
+        userQuizResponse.setPreferTime(preferTime);
+
+
+        userQuizResponse.setBmiResult(userResponse.getBmi());
+
+        BMICalculationResponse bmiCalculationResponse = bmiService.getBMIResponse(userResponse.getBmi());
+        userQuizResponse.setBmiLevel(bmiCalculationResponse.getLevel());
+        userQuizResponse.setBmiMessage(bmiCalculationResponse.getMessage());
+
+
+        UserQuizResponse saved = userResponseRepo.save(userQuizResponse);
         return ResponseEntity.ok(saved);
     }
 
