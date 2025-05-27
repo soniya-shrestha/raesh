@@ -36,22 +36,22 @@
 }
 
 .progress-bar {
-  flex: 1;
   display: flex;
-  height: 6px;
+  width: 100%;
+  height: 8px;
   background-color: #FAF1E6;
-  border-radius: 3px;
+  border-radius: 4px;
   overflow: hidden;
 }
 
 .step {
   flex: 1;
-  background-color: #eee;
-  transition: background-color 0.3s;
+  background-color: transparent; // make default clear
+  transition: background-color 0.3s ease;
 }
 
 .step.active {
-  background-color: #E78F81;
+  background-color: #E78F81; // the active fill color
 }
 
 

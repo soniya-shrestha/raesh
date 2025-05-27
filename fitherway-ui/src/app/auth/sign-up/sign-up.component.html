@@ -1,23 +1,80 @@
 <div class="login-wrapper">
   <div class="login-card">
-    <div class="steps">
+    <!-- <div class="steps">
       <button class="step active">✔ Account</button>
       <button class="step">✨ Your Plan</button>
+    </div> -->
+
+    <h2>Create Your Account</h2>
+    <p>Fill in your details to continue</p>
+
+<form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" formControlName="username" class="form-control" placeholder="Enter your username" />
+      </div>
     </div>
-
-  
-
-    <h2>Your Workout Plan is ready!</h2>
-    <p>Enter your email to create your account</p>
-
-    <div class="form-group">
-      <input type="email" id="email" placeholder="Enter your e-mail" />
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" formControlName="email" class="form-control" placeholder="Enter your email" />
+      </div>
     </div>
+  </div>
 
-    <div class="privacy">
-      <span>🔒 We respect your privacy and protect your data</span>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="text" id="phone" formControlName="phone" class="form-control" placeholder="Enter your number" />
+      </div>
     </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="address">Address</label>
+        <input type="text" id="address" formControlName="address" class="form-control" placeholder="Enter your address"/>
+      </div>
+    </div>
+  </div>
 
-    <button class="login-btn" (click)="onClick()">See my plan</button>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" formControlName="password" class="form-control" />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" id="confirmPassword" formControlName="confirmPassword" class="form-control" />
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="form-group">
+        <label for="profile">Profile Picture</label>
+        <div class="drop-zone" (dragover)="onDragOver($event)" (drop)="onDrop($event)" (click)="fileInput.click()">
+          <span *ngIf="!previewUrl">Drag & drop or click to upload</span>
+          <img *ngIf="previewUrl" [src]="previewUrl" alt="Preview" />
+          <input type="file" #fileInput id="profile" (change)="onFileChange($event)" hidden />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="privacy">
+    <span>🔒 We respect your privacy and protect your data</span>
+  </div>
+
+  <button type="submit" class="login-btn" [disabled]="signupForm.invalid">See my plan</button>
+</form>
+
+
   </div>
 </div>

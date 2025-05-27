@@ -164,7 +164,7 @@
     <input type="number" class="form-control me-2" [(ngModel)]="bmi.heightFeet" placeholder="ft" (focus)="onInputFocus()"  />
     <input type="number" class="form-control" [(ngModel)]="bmi.heightInch" placeholder="in" (focus)="onInputFocus()"  />
   </div>
-  <div class="text-danger" *ngIf="!isHeightValid() && (bmi.height || bmi.heightFeet)">Invalid height entered.</div>
+  <!-- <div class="text-danger" *ngIf="!isHeightValid() && (bmi.height || bmi.heightFeet)">Invalid height entered.</div> -->
   <div class="bmi-info-card" *ngIf="showBmiInfo">
     <h3>Calculating your BMI</h3>
     <p>BMI is used to estimate risk levels of potential health issues.</p>

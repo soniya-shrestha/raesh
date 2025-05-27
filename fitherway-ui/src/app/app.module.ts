@@ -7,14 +7,13 @@ import { BaseComponent } from './home/base/base.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AuthInterceptor } from './core/AuthInterceptor';
-import { DashboardComponent } from './Admin/dashboard/dashboard.component';
 import { UserManagementComponent } from './Admin/user-management/user-management.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
     AppComponent,
     BaseComponent,
-    DashboardComponent,
     UserManagementComponent
 
    
@@ -22,7 +21,8 @@ import { UserManagementComponent } from './Admin/user-management/user-management
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
+    HttpClientModule, 
+    RouterModule
   ],
   providers: [
     provideClientHydration(), 

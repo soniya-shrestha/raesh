@@ -84,10 +84,6 @@ step = 0;
     if (this.step === 9) this.userData.preferDayTime = value?.label;   
     if (this.step === 10) this.userData.equipment = value?.label; 
 
-
-
-
-
     this.step++;
   }
 
