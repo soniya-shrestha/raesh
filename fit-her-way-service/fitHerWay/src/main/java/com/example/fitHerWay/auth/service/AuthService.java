@@ -1,13 +1,11 @@
 package com.example.fitHerWay.auth.service;
 
 
-import com.example.fitHerWay.auth.dto.JwtResponse;
-import com.example.fitHerWay.auth.dto.LoginRequest;
-import com.example.fitHerWay.auth.dto.RegisterRequest;
+import com.example.fitHerWay.auth.dto.request.AuthRequest;
+import com.example.fitHerWay.auth.dto.response.AuthResponse;
 
 public interface AuthService {
-    JwtResponse register(RegisterRequest request);
+    AuthResponse login(AuthRequest authRequest);
 
-    JwtResponse login(LoginRequest request);
+    void logout();
 }
-
