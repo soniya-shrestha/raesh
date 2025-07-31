@@ -1,0 +1,72 @@
+.day-section {
+  margin-bottom: 2rem;
+
+  h2 {
+    color: #a25f55;
+    margin-bottom: 1rem;
+  }
+
+  .exercise-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .exercise-card {
+    width: calc(33.333% - 1rem); // 3 cards per row
+    background: #fdfaf6;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .exercise-details {
+      flex: 1;
+
+      h3 {
+        margin: 0;
+        color: #a25f55;
+        font-size: 1.1rem;
+      }
+
+      p {
+        margin: 4px 0;
+        font-size: 0.9rem;
+      }
+
+      button {
+        padding: 0.4rem 0.8rem;
+        background-color: #ffcfb3;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.2s ease;
+
+        &.done {
+          background-color: #a25f55;
+          color: white;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 992px) {
+  .exercise-card {
+    width: calc(50% - 1rem); // 2 per row
+  }
+}
+
+@media (max-width: 600px) {
+  .exercise-card {
+    width: 100%; // 1 per row
+  }
+}

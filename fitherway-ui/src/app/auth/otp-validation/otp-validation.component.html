@@ -3,10 +3,19 @@
     <h2>Enter the 6-digit code</h2>
     <p>We’ve sent a verification code to your email</p>
 
-    <div class="otp-inputs">
-      <input type="text" maxlength="1" *ngFor="let box of otpArray; let i = index"
-             [(ngModel)]="otpValues[i]" (input)="moveToNext(i, $event)" />
-    </div>
+     <form [formGroup]="otpDetails" (ngSubmit)="otpCheck()">
+      <div class="otp-boxes">
+        <input *ngFor="let otp of otpControls; let i = index"
+               #otpInput
+               class="otp-input"
+               type="text"
+               maxlength="1"
+               [formControlName]="otp"
+               (keydown)="moveToNext($event, i)"
+               (paste)="handlePaste($event)" />
+      </div>
+       <button class="login-btn" [disabled]="remainingTime <= 0" >Verify OTP</button>
+    </form>
 
     <div class="message">
       <p>If you don't see a code in your inbox, check your spam folder.</p>
@@ -17,6 +26,6 @@
       <p *ngIf="remainingTime <= 0" class="error-text">OTP has expired</p>
     </div>
 
-    <button class="login-btn" [disabled]="remainingTime <= 0">Verify OTP</button>
+   
   </div>
 </div>

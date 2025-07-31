@@ -1,0 +1,67 @@
+<div class="dashboard-wrapper">
+  <!-- Left Content Column -->
+  <div class="left-content">
+    <div class="welcome-message">
+      <h2>Welcome, {{ fullName }} 👋</h2>
+      <p>Today is a great day to be fit!</p>
+    </div>
+
+    <div class="middle-section">
+      <!-- Activity and Overview -->
+      <div class="activity-chart">
+        <h4>Activity</h4>
+        <img src="assets/chart-placeholder.svg" alt="Activity Chart" />
+      </div>
+
+      <div class="today-overview">
+        <h4>Today Overview</h4>
+        <div class="circle-progress">+60%</div>
+        <ul>
+          <li>Stretching: 25 Minutes</li>
+          <li>Crossfit: 40 Minutes</li>
+          <li>Yoga: 55 Minutes</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bottom-section">
+      <div class="recommended-food">
+        <h5>Recommended Food</h5>
+        <div class="food-cards"> 
+          <div class="food-card">🥤 Breakfast - Fruit Juice  </div> 
+            <div class="food-card">🍊 Lunch - Fresh Orange Fruits  </div>
+          <div class="food-card">🥗 Dinner - Fresh Veggies </div>
+        
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Profile Card -->
+  <div class="profile-card">
+    <img [src]="profileImageUrl" alt="Profile" class="profile-img" />
+    <h4>{{ fullName }}</h4>
+    <p>{{ username }}</p>
+
+    <div class="user-stats">
+      <div>{{ weight }} kg <span>Weight</span></div>
+      <div>{{ height }} cm <span>Height</span></div>
+      <div>{{ age }} <span>Age</span></div>
+    </div>
+
+  <div class="calendar">
+  <h5><i class="fas fa-calendar-alt"></i> Workout Calendar</h5>
+  <app-calendar></app-calendar>
+</div>
+
+    <div class="schedule">
+      <h5><i class="fas fa-dumbbell"></i> Today's Schedule</h5>
+      <ul>
+        <li>🏋️‍♀️ HIIT - 7:00 AM</li>
+        <li>🧘 Yoga - 5:00 PM</li>
+        <li>🚶 Evening Walk - 7:30 PM</li>
+      </ul>
+    </div>
+  </div>
+</div>

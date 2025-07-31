@@ -28,13 +28,13 @@
     margin-bottom: 1.5rem;
   }
 
-  .otp-inputs {
+  .otp-boxes {
     display: flex;
     justify-content: space-between;
     gap: 0.5rem;
     margin-bottom: 1.5rem;
 
-    input {
+    .otp-input {
       width: 44px;
       height: 52px;
       font-size: 1.5rem;

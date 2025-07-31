@@ -91,4 +91,34 @@
       }
     }
   }
+} 
+
+.text-danger{
+    content: "*";
+    font-family: Poppins;
+    color: rgba(229, 62, 62, 1);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 17px;
+    margin-left: 4px;
+} 
+
+.extra-links {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+
+  a {
+    font-size: 0.85rem;
+    color: #a25f55;
+    font-weight: 500;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+      color:#fe7745 ;
+    }
+  }
 }
+

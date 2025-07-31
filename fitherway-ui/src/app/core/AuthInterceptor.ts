@@ -12,9 +12,7 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor( private router: Router) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> { 
-  //     if (request.url.includes('/api/quiz/submit')) {
-  //   return next.handle(request);  // send request as-is, no token
-  // }
+
      const token = localStorage.getItem('access_token'); 
 
     if (token) {

@@ -1,9 +1,5 @@
 <div class="login-wrapper">
   <div class="login-card">
-    <!-- <div class="steps">
-      <button class="step active">✔ Account</button>
-      <button class="step">✨ Your Plan</button>
-    </div> -->
 
     <h2>Create Your Account</h2>
     <p>Fill in your details to continue</p>
@@ -14,13 +10,25 @@
     <div class="col-md-6">
       <div class="form-group">
         <label for="username">Username</label>
-        <input type="text" id="username" formControlName="username" class="form-control" placeholder="Enter your username" />
+        <input type="text" id="username" formControlName="username" class="form-control" placeholder="Enter your username" required/>  
+          <div *ngIf="signupForm.get('name')?.touched">
+          <small class="text-danger" *ngIf="signupForm.get('name')?.hasError('required')">Full name is
+            required!</small>
+          <small class="text-danger" *ngIf="signupForm.get('name')?.hasError('pattern')">Please enter a
+            full name.</small>
+        </div>
       </div>
     </div>
     <div class="col-md-6">
       <div class="form-group">
         <label for="email">Email</label>
-        <input type="email" id="email" formControlName="email" class="form-control" placeholder="Enter your email" />
+        <input type="email" id="email" formControlName="email" class="form-control" placeholder="Enter your email" /> 
+         <div *ngIf="signupForm.get('email')?.touched">
+          <small class="text-danger" *ngIf="signupForm.get('email')?.hasError('required')">Email is
+            required!</small>
+          <small class="text-danger" *ngIf="signupForm.get('email')?.hasError('pattern')">Please enter a
+            valid email address.</small>
+        </div>
       </div>
     </div>
   </div>
@@ -29,13 +37,23 @@
     <div class="col-md-6">
       <div class="form-group">
         <label for="phone">Phone Number</label>
-        <input type="text" id="phone" formControlName="phone" class="form-control" placeholder="Enter your number" />
+        <input type="text" id="phone" formControlName="phone" class="form-control" placeholder="Enter your number" /> 
+         <div *ngIf="signupForm.get('phone')?.touched">
+          <small class="text-danger" *ngIf="signupForm.get('phone')?.hasError('required')">Phone number is
+            required!</small>
+          <small class="text-danger" *ngIf="signupForm.get('phone')?.hasError('pattern')">Please enter a
+            valid phone number.</small>
+        </div>
       </div>
     </div>
     <div class="col-md-6">
       <div class="form-group">
         <label for="address">Address</label>
-        <input type="text" id="address" formControlName="address" class="form-control" placeholder="Enter your address"/>
+        <input type="text" id="address" formControlName="address" class="form-control" placeholder="Enter your address"/> 
+         <div *ngIf="signupForm.get('address')?.touched">
+          <small class="text-danger" *ngIf="signupForm.get('password')?.hasError('required')">Address
+            is required!</small>
+        </div>
       </div>
     </div>
   </div>
@@ -44,13 +62,21 @@
     <div class="col-md-6">
       <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" id="password" formControlName="password" class="form-control" />
+        <input type="password" id="password" formControlName="password" class="form-control" /> 
+         <div *ngIf="signupForm.get('password')?.touched">
+          <small class="text-danger" *ngIf="signupForm.get('password')?.hasError('required')">Password
+            is required!</small>
+        </div>
       </div>
     </div>
     <div class="col-md-6">
       <div class="form-group">
         <label for="confirmPassword">Confirm Password</label>
-        <input type="password" id="confirmPassword" formControlName="confirmPassword" class="form-control" />
+        <input type="password" id="confirmPassword" formControlName="confirmPassword" class="form-control" /> 
+          <div *ngIf="signupForm.get('confirmPassword')?.touched">
+          <small class="text-danger" *ngIf="signupForm.get('confirmPassword')?.hasError('required')">Confirm Password
+            is required!</small>
+        </div>
       </div>
     </div>
   </div>
@@ -72,7 +98,7 @@
     <span>🔒 We respect your privacy and protect your data</span>
   </div>
 
-  <button type="submit" class="login-btn" [disabled]="signupForm.invalid">See my plan</button>
+  <button type="submit" class="login-btn" [disabled]="signupForm.invalid" >See my plan</button>
 </form>
 
 

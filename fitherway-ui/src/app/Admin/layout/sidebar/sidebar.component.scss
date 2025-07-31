@@ -1,0 +1,97 @@
+#sidebar {
+  // width: 240px;
+  height: 95vh;
+  background-color: #FFCFB3;
+  display: flex;
+  flex-direction: column;
+  padding-top: 1rem;
+  border-right: 2px solid #FAF1E6;
+  font-family: 'Segoe UI', sans-serif;
+  color: #a25f55;
+
+  .menus {
+    ul.menu-items {
+      list-style: none;
+      padding-left: 0;
+
+      .menu-item {
+        width: 100%;
+
+        .menu-btn {
+          width: 90%;
+          padding: 0.75rem 1rem;
+          font-size: 15px;
+          color: #a25f55;
+          border: none;
+          background-color: transparent;
+          text-align: left;
+          border-radius: 0 20px 20px 0;
+          transition: background 0.3s ease;
+
+          &:hover,
+          &.active,
+          &.active-link {
+            background-color: #FAF1E6;
+            font-weight: 600;
+          }
+
+          span.fas {
+            margin-right: 10px;
+          }
+
+          &.has-submenu .fas {
+            font-size: 12px;
+            color: #a25f55;
+          }
+        }
+
+        .submenu-items {
+          padding-left: 1rem;
+
+          .submenu-item {
+            .submenu-btn {
+              padding: 0.5rem 1rem;
+              font-size: 14px;
+              background-color: transparent;
+              border: none;
+              color: #7a4c44;
+              border-radius: 0 20px 20px 0;
+
+              &.active,
+              &:hover {
+                background-color: #ffe7d8;
+                font-weight: 500;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .bottom-part {
+     .logout-btn {
+      background-color: #a25f55;
+      color: white;
+      width: 100%;
+      justify-content: center;
+      border-radius: 10px;
+      padding: 0.5rem;
+      font-weight: 500;
+       margin-top: 300px;
+      &:hover {
+        background-color: #8d4d45;
+      }
+    
+
+      // .fas {
+      //   font-size: 18px;
+      // }
+    }
+    .footer {
+      font-size: 12px;
+      margin-top: 10px;
+      color: #7c3c2f;
+    }
+  }
+}

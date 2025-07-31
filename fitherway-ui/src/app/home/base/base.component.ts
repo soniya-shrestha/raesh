@@ -17,7 +17,11 @@ toggleMenu() {
 
   openQuiz() {
     this.router.navigate(['/quiz-session']);
-  } 
+  }  
+
+  navigateToLogin(){
+    this.router.navigate(['/auth/login']);
+  }
 
   
 }

@@ -4,26 +4,29 @@ import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Auth } from '../models/auth';
+import { environment } from '../../../environment/environment';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService {
-  constructor(private http: HttpClient) {}
+export class AuthService { 
+  private baseUrl: string = environment.baseUrl; 
+  constructor(private http: HttpClient) {} 
 
-  login(email: string, password: string): Observable<Auth> {
-    return this.http.post<Auth>('/api/auth/login', { email, password }).pipe(
-      tap((response: Auth) => {
-        localStorage.setItem('access_token', response.token);
-      })
-    );
+
+
+  login(loginDetails: any): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/auth/login`, loginDetails,{
+      headers: { 'Content-Type': 'application/json' } });
   }
 
-  register(data: any): Observable<Auth> {
-    return this.http.post<Auth>('/api/auth/register', data).pipe(
-      tap((response: Auth) => {
-        localStorage.setItem('access_token', response.token);
-      })
-    );
+
+  registerStudent(formData: FormData): Observable<any> {
+    return this.http.post(`${this.baseUrl}/users/register`, formData);
+  } 
+
+   otp(data: { otp: string, email: string }): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/users/validate`, data);
   }
+
 }

@@ -7,14 +7,12 @@ import { BaseComponent } from './home/base/base.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AuthInterceptor } from './core/AuthInterceptor';
-import { UserManagementComponent } from './Admin/user-management/user-management.component';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
     AppComponent,
     BaseComponent,
-    UserManagementComponent
 
    
   ],

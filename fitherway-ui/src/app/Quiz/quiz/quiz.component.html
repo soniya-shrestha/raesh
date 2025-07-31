@@ -98,11 +98,10 @@
 
   <div *ngIf="step === 10" class="step-content">
     <h2>What equipment do you have available?</h2>
-    <div class="option" *ngFor="let equipment of equipments " (click)="nextStep(equipment)">
-      <strong>{{ equipment.label }}</strong> <br>
-      <span>{{ equipment.subtitle }}</span>
-
-    </div>
+   <div class="optionEquipment" *ngFor="let equipment of equipments" (click)="nextStep(equipment)">
+    <div class="title">{{ equipment.label }}</div>
+    <div class="subtitle">{{ equipment.subtitle }}</div>
+</div>
   </div> 
 
 <!-- Step 11: Actual Age -->

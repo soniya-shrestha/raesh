@@ -1,0 +1,43 @@
+<div id="sidebar" class="side-navbar d-flex flex-column">
+    <div class="menus mt-4">
+        <ul class="menu-items">
+            <li class="menu-item" *ngFor="let m of menus">
+                <button
+                    class="menu-btn btn ms-3 d-flex align-items-center justify-content-start"
+                    [routerLink]="m.url"
+                    routerLinkActive="active-link"
+                    [ngClass]="{ 'active': isActive(m), 'has-submenu': m.submenu }"
+                    (click)="toggleSubmenu(m)"
+                >
+                    <span [class]="m.icon"></span>
+                    <span class="ms-2">{{ m.title }}</span>
+                    <span *ngIf="m.submenu" class="ms-auto fas" [ngClass]="{ 'fa-chevron-down': !m.open, 'fa-chevron-up': m.open }"></span>
+                </button>
+
+                <ul *ngIf="m.submenu && m.open" class="submenu-items ms-4 mt-2">
+                    <li class="submenu-item" *ngFor="let sub of m.submenu">
+                        <button
+                            class="submenu-btn btn d-flex align-items-center justify-content-start"
+                            [routerLink]="sub.url"
+                            routerLinkActive="active-link"
+                            [ngClass]="{ 'active': isActive(sub) }"
+                        >
+                            <span [class]="sub.icon"></span>
+                            <span class="ms-2">{{ sub.title }}</span>
+                        </button>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="bottom-part  px-4">
+        <div class="logout mx-auto mb-3">
+            <button class="btn btn-sm logout-btn d-flex align-items-center" (click)="onLogOut()">
+                <span class="fas fa-sign-out-alt"></span>
+                <span class="ms-2">Logout</span>
+            </button>
+        </div>
+    
+    </div>
+</div>

@@ -8,7 +8,7 @@
   <div class="side-menu" [class.open]="menuOpen">
     <button class="close-btn" (click)="toggleMenu()">×</button>
     <ul>
-      <li routerLink="/auth/login"><i class="fa fa-sign-in-alt"></i> Login</li>
+      <li (click)="navigateToLogin()"><i class="fa fa-sign-in-alt"></i> Login</li>
       <li><i class="fa fa-info-circle"></i> About Us</li>
       <li><i class="fa fa-envelope"></i> Contact Us</li>
       <li><i class="fa fa-lock"></i> Privacy Policy</li>
@@ -53,7 +53,7 @@
       <div class="footer-links">
         <h4>Quick Links</h4>
         <ul>
-          <li><a routerLink="/login"><i class="fa fa-sign-in-alt"></i> Login</a></li>
+          <li><a routerLink="/auth/login"><i class="fa fa-sign-in-alt"></i> Login</a></li>
           <li><a routerLink="/about"><i class="fa fa-info-circle"></i> About Us</a></li>
           <li><a routerLink="/contact"><i class="fa fa-envelope"></i> Contact Us</a></li>
           <li><a routerLink="/privacy-policy"><i class="fa fa-lock"></i> Privacy Policy</a></li>

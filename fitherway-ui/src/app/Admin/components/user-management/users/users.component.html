@@ -1,0 +1,35 @@
+<div class="admin-page fadeIn">
+  <h2 class="title">Manage Users</h2>
+
+  <div class="user-table">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Full Name</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users; index as i">
+          <td>{{ i + 1 }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.role }}</td>
+          <td>
+            <span [class.active]="user.active" [class.inactive]="!user.active">
+              {{ user.active ? 'Active' : 'Inactive' }}
+            </span>
+          </td>
+          <td>
+            <button class="btn btn-edit">Edit</button>
+            <button class="btn btn-delete">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

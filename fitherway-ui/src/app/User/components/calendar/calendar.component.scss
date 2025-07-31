@@ -1,0 +1,30 @@
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); // 7 columns across
+  gap: 6px;
+
+  .day-label {
+    font-weight: bold;
+    text-align: center;
+    background-color: #f7e6dc;
+    padding: 0.5rem 0;
+    border-radius: 4px;
+    color: #7c4941;
+  }
+
+  .day-cell {
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    border-radius: 6px;
+    background-color: #FFCFB3;
+    font-weight: 500;
+    color: #7c4941;
+
+    &.today {
+      background-color: #a25f55;
+      color: #fff;
+      font-weight: bold;
+    }
+  }
+}

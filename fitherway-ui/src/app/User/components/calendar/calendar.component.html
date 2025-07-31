@@ -1,0 +1,21 @@
+<div class="calendar-wrapper">
+  <div class="calendar-header">
+    <h4>{{ monthName }} {{ year }}</h4>
+  </div>
+
+  <div class="calendar-grid">
+    <!-- Weekday labels -->
+    <div class="day-label" *ngFor="let day of ['S','M','T','W','Th','F','Sa']">
+      {{ day }}
+    </div>
+
+    <!-- Flattened date cells -->
+    <div
+      class="day-cell"
+      *ngFor="let date of flattenedDays"
+      [class.today]="isToday(date)"
+    >
+      {{ date?.getDate() || '' }}
+    </div>
+  </div>
+</div>

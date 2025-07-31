@@ -9,15 +9,7 @@ import { OtpValidationComponent } from './otp-validation/otp-validation.componen
 
 
 
-const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'login',
-    pathMatch: 'full',
-  },
-
-
-  
+const routes: Routes = [ 
   {
     path: 'login', component: LoginComponent
   },
