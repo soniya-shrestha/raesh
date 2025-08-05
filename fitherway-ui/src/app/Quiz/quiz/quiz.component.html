@@ -76,19 +76,45 @@
 
   <div *ngIf="step === 7" class="step-content">
     <h2>How often do you want to workout?</h2>
-    <div class="option" *ngFor="let preferDay of preferDays" (click)="nextStep(preferDay)">
-      <strong>{{ preferDay.label }}</strong>
+   <div class="day-grid">
+    <div class="day-card"
+         *ngFor="let day of preferDays"
+         [class.selected]="userData.preferDay.includes(day.label)"
+         (click)="toggleDaySelection(day.label)">
+      {{ day.label }}
+    </div>
+  </div>
+  <button class=" btn next-btn" (click)="nextStep()" [disabled]="userData.preferDay.length === 0">Next</button>
+  </div> 
+
+  <!-- Step 8: Select Body Parts -->
+<div *ngIf="step === 8" class="quiz-step">
+  <h2>Select Body Parts to Focus</h2>
+  <div class="options-grid">
+    <div
+      class="option-body"
+      *ngFor="let part of bodyParts"
+      [class.selected]="userData.bodyParts.includes(part.label)"
+      (click)="toggleBodyPart(part.label)"
+    >
+      {{ part.label }}
     </div>
   </div>
 
-  <div *ngIf="step === 8" class="step-content">
+  <div class="navigation">
+    <button class="btn next-btn"   (click)="nextStep()" [disabled]="userData.bodyParts.length === 0" >Next</button>
+  </div>
+</div>
+
+
+  <div *ngIf="step === 9" class="step-content">
     <h2>How long do you want your workouts to be?</h2>
     <div class="option" *ngFor="let preferTime of preferTimes" (click)="nextStep(preferTime)">
       <strong>{{ preferTime.label }}</strong>
     </div>
   </div>
 
-  <div *ngIf="step === 9" class="step-content">
+  <div *ngIf="step === 10" class="step-content">
     <h2>When did you prefer to workouts?</h2>
     <div class="option" *ngFor="let preferDayTime of preferDayTimes" (click)="nextStep(preferDayTime)">
       <span>{{ preferDayTime.emoji }}</span>
@@ -96,7 +122,7 @@
     </div>
   </div>
 
-  <div *ngIf="step === 10" class="step-content">
+  <div *ngIf="step === 11" class="step-content">
     <h2>What equipment do you have available?</h2>
    <div class="optionEquipment" *ngFor="let equipment of equipments" (click)="nextStep(equipment)">
     <div class="title">{{ equipment.label }}</div>
@@ -105,7 +131,7 @@
   </div> 
 
 <!-- Step 11: Actual Age -->
-<div *ngIf="step === 11" class="step-content">
+<div *ngIf="step === 12" class="step-content">
   <h2>Enter your actual age</h2>
   <div class="form-row mt-3">
     <input
@@ -124,7 +150,7 @@
 </div>
 
 <!-- Step 12: Weight -->
-<div *ngIf="step === 12" class="step-content">
+<div *ngIf="step === 13" class="step-content">
   <h2>Enter your current weight</h2>
   <div class="toggle-switch">
     <button class="toggle-btn" [class.active]="bmi.weightUnit === 'kg'" (click)="bmi.weightUnit = 'kg'">kg</button>
@@ -150,7 +176,7 @@
 </div>
 
 <!-- Step 13: Height -->
-<div *ngIf="step === 13" class="step-content">
+<div *ngIf="step === 14" class="step-content">
   <h2>Enter your current height</h2>
   <div class="toggle-switch">
     <button class="toggle-btn" [class.active]="bmi.heightUnit === 'cm'" (click)="bmi.heightUnit = 'cm'">cm</button>
@@ -172,7 +198,7 @@
 </div>
 
 <!-- Step 14: BMI Summary -->
-<div *ngIf="step === 14" class="step-content">
+<div *ngIf="step === 15" class="step-content">
   <h2>Your Fitness Profile</h2>
   <div class="summary-card">
     <div class="summary-title">

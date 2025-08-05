@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../service/auth.service';
+import { ToastService } from '../../service/toast.service';
 
 @Component({
   selector: 'app-login',
@@ -11,12 +12,14 @@ import { AuthService } from '../service/auth.service';
 export class LoginComponent {
   loginForm: FormGroup;
   isLoading = false;
-  errorMessage: string = '';
-  hidePassword = true;
+  hidePassword = true; 
+   passwordVisibility: boolean = false;
+  isPasswordFocused: boolean = false;
 
   constructor(
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+     private toast: ToastService,
   ) {
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -30,8 +33,9 @@ export class LoginComponent {
       return;
     }
 
-    this.isLoading = true;
-    this.errorMessage = '';
+    this.isLoading = true; 
+    localStorage.removeItem('access_token');
+   
      this.authService.login(this.loginForm.value).subscribe({ 
       next: (response: any) => {
       if (response.status) {
@@ -43,22 +47,27 @@ export class LoginComponent {
         localStorage.setItem('user_role', role);
         localStorage.setItem('fullName', response.data.user?.userName);
 
-        if (role) {
+        if (role) { 
+          this.toast.showSuccess("Login Successfully!");
           this.redirectUser(role);
         } else {
-          this.errorMessage = 'User role not found.';
+          this.toast.showError("User role not found.");
           this.isLoading = false;
         }
       } else {
-        this.errorMessage = 'Invalid credentials';
+        this.toast.showError("Invalid credentials");
         this.isLoading = false;
       }
     },
     error: (err) => {
-      this.errorMessage = err.error?.message || 'Login failed. Please try again.';
+      this.toast.showError(err.error?.message || 'Login failed. Please try again.');
       this.isLoading = false;
     }
   });
+  } 
+
+    togglePasswordVisibility(): void {
+    this.passwordVisibility = !this.passwordVisibility;
   }
 
   private redirectUser(role: string) {

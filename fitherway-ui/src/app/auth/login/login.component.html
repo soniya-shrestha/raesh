@@ -14,15 +14,27 @@
             valid email address.</small>
         </div>
       </div>
+<div class="form-group">
+  <label>Password</label>
+  <div class="password-wrapper">
+    <input
+      [type]="passwordVisibility ? 'text' : 'password'"
+      formControlName="password"
+      placeholder="Enter your password"
+    />
+    <i
+      class="fa"
+      [ngClass]="passwordVisibility ? 'fa-eye-slash' : 'fa-eye'"
+      (click)="togglePasswordVisibility()"
+    ></i>
+  </div>
+  <div *ngIf="loginForm.get('password')?.touched">
+    <small class="text-danger" *ngIf="loginForm.get('password')?.hasError('required')">
+      Password is required!
+    </small>
+  </div>
+</div>
 
-      <div class="form-group">
-        <label>Password</label>
-        <input id="password" type="password" formControlName="password" placeholder="Enter your password" required /> 
-          <div *ngIf="loginForm.get('password')?.touched">
-          <small class="text-danger" *ngIf="loginForm.get('password')?.hasError('required')">Password
-            is required!</small>
-        </div>
-      </div> 
       <div class="extra-links">
          <a routerLink="/auth/forgot-password">Forgot Password?</a>
       </div>

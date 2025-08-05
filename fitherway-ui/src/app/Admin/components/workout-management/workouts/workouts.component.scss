@@ -1,0 +1,102 @@
+.board-list-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+
+  h1 {
+    font-size: 24px;
+    font-weight: 500;
+    margin: 0;
+    color: #a25f55;
+  }
+
+  p {
+    margin: 4px 0 0;
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  .header-text {
+    display: flex;
+    flex-direction: column;
+  } 
+
+  .add-button{
+    align-self: flex-end;
+      background-color: #a25f55;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 0.75rem;
+  }
+}
+
+.workout-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #FDFAF6;
+  font-size: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+  th, td {
+    padding: 12px 10px;
+    border-bottom: 1px solid #FFCFB3;
+    text-align: center;
+  }
+
+  th {
+    background-color: #FFCFB3;
+    color: #a25f55;
+    text-transform: uppercase;
+  }
+
+  video {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  .actions-cell {
+    position: relative;
+
+    .three-dots {
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      color: #a25f55;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 24px;
+      right: 0;
+      background-color: #fff;
+      border: 1px solid #FFCFB3;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      z-index: 10;
+
+      button {
+        padding: 6px 12px;
+        border: none;
+        background: none;
+        color: #a25f55;
+        text-align: left;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #fe7745;
+          color: #fff;
+        }
+      }
+    }
+  }
+}

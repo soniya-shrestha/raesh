@@ -61,23 +61,46 @@
   <div class="row">
     <div class="col-md-6">
       <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" formControlName="password" class="form-control" /> 
-         <div *ngIf="signupForm.get('password')?.touched">
-          <small class="text-danger" *ngIf="signupForm.get('password')?.hasError('required')">Password
-            is required!</small>
-        </div>
-      </div>
+  <label for="password">Password</label>
+  <div class="password-wrapper">
+    <input
+      [type]="passwordVisible ? 'text' : 'password'"
+      id="password"
+      formControlName="password"
+      placeholder="Enter your password"
+    />
+    <i
+      class="fa"
+      [ngClass]="passwordVisible ? 'fa-eye-slash' : 'fa-eye'"
+      (click)="passwordVisible = !passwordVisible"
+    ></i>
+  </div>
+  <div *ngIf="signupForm.get('password')?.touched">
+    <small class="text-danger" *ngIf="signupForm.get('password')?.hasError('required')">Password is required!</small>
+  </div>
+</div>
     </div>
     <div class="col-md-6">
       <div class="form-group">
-        <label for="confirmPassword">Confirm Password</label>
-        <input type="password" id="confirmPassword" formControlName="confirmPassword" class="form-control" /> 
-          <div *ngIf="signupForm.get('confirmPassword')?.touched">
-          <small class="text-danger" *ngIf="signupForm.get('confirmPassword')?.hasError('required')">Confirm Password
-            is required!</small>
-        </div>
-      </div>
+  <label for="confirmPassword">Confirm Password</label>
+  <div class="password-wrapper">
+    <input
+      [type]="confirmPasswordVisible ? 'text' : 'password'"
+      id="confirmPassword"
+      formControlName="confirmPassword"
+      placeholder="Confirm your password"
+    />
+    <i
+      class="fa"
+      [ngClass]="confirmPasswordVisible ? 'fa-eye-slash' : 'fa-eye'"
+      (click)="confirmPasswordVisible = !confirmPasswordVisible"
+    ></i>
+  </div>
+  <div *ngIf="signupForm.get('confirmPassword')?.touched">
+    <small class="text-danger" *ngIf="signupForm.get('confirmPassword')?.hasError('required')">Confirm Password is required!</small>
+    <small class="text-danger" *ngIf="signupForm.errors?.['mismatch']">Passwords do not match.</small>
+  </div>
+</div>
     </div>
   </div>
 

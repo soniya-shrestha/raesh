@@ -8,6 +8,8 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AuthInterceptor } from './core/AuthInterceptor';
 import { RouterModule } from '@angular/router';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,13 @@ import { RouterModule } from '@angular/router';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule, 
-    RouterModule
+    RouterModule, 
+    BrowserAnimationsModule,
+   ToastrModule.forRoot({ 
+      timeOut: 3000,
+      preventDuplicates: true,
+      positionClass: 'toast-bottom-right'
+    }),
   ],
   providers: [
     provideClientHydration(), 

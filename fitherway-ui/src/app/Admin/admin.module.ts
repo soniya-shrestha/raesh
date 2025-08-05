@@ -10,6 +10,10 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProgressComponent } from './components/reports/progress/progress.component';
 import { WorkoutsComponent } from './components/workout-management/workouts/workouts.component';
 import { AddWorkoutsComponent } from './components/workout-management/add-workouts/add-workouts.component';
+import { EditWorkoutsComponent } from './components/workout-management/edit-workouts/edit-workouts.component';
+import { AddNutritionComponent } from './components/nutritional-management/add-nutrition/add-nutrition.component';
+import { NutritionPlansComponent } from './components/nutritional-management/nutrition-plans/nutrition-plans.component';
+import { EditNutritionComponent } from './components/nutritional-management/edit-nutrition/edit-nutrition.component';
 
 
 
@@ -24,6 +28,10 @@ import { AddWorkoutsComponent } from './components/workout-management/add-workou
     ProgressComponent,
     WorkoutsComponent,
     AddWorkoutsComponent,
+    EditWorkoutsComponent,
+    AddNutritionComponent,
+   NutritionPlansComponent,
+   EditNutritionComponent
    
   ],
   imports: [

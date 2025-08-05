@@ -1,0 +1,47 @@
+<div class="nutrition-list-container">
+  <div class="header-section">
+    <div class="header-text">
+      <h1>Nutrition Plan Management</h1>
+    </div>
+    <button class="add-button" (click)="addPlan()">
+      Add Nutrition Plan
+    </button>
+  </div>
+  <hr />
+
+  <table class="nutrition-table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Calories</th>
+        <th>BMI Level</th>
+        <th>Goal</th>
+        <th>Status</th>
+        <th>Image</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let plan of plans">
+        <td>{{ plan.title }}</td>
+        <td>{{ plan.caloriesPerDay }}</td>
+        <td>{{ plan.bmiLevel }}</td>
+        <td>{{ plan.goalType }}</td>
+        <td>{{ plan.status ? 'Active' : 'Inactive' }}</td>
+        <td>
+  <a *ngIf="plan.imageUrl" [href]="plan.imageUrl" target="_blank">{{ plan.imageUrl }}</a>
+  <span *ngIf="!plan.imageUrl">-</span>
+</td>
+        <td class="actions-cell">
+          <div class="dropdown">
+            <button class="three-dots" (click)="toggleMenu(plan)">&#x22EE;</button>
+            <div class="dropdown-menu" *ngIf="selectedPlan === plan">
+              <button (click)="edit(plan.id!)">Edit</button>
+              <button (click)="delete(plan.id!)">Delete</button>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

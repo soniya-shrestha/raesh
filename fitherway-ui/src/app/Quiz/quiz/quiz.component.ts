@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class QuizComponent implements OnInit{
  constructor(private quizService: QuizService, private route: Router) {}
 step = 0;
-  totalSteps = 14;
+  totalSteps = 15;
 
   goals: any[] = [];
   experience: any[] = [];
@@ -19,7 +19,15 @@ step = 0;
   dreams: any[] = [];
   exercises: any[] = [];
   bestShape: any[] = [];
-  preferDays: any[] = [];
+  preferDays: any[] = []; 
+  bodyParts: any[] = [
+  { label: 'Chest' },
+  { label: 'Back' },
+  { label: 'Arms' },
+  { label: 'Legs' },
+  { label: 'Shoulders' },
+  { label: 'Core' }
+];
   preferTimes: any[] = [];
   preferDayTimes: any[] = [];
   equipments: any[] = [];
@@ -34,7 +42,8 @@ step = 0;
     dream:'',
     exercise:'',
     bestShape:'',
-    preferDay:'',
+    preferDay:[], 
+    bodyParts: [],  
     preferTime:'',
     preferDayTime:''  
   };
@@ -79,10 +88,11 @@ step = 0;
     if (this.step === 4) this.userData.experience = value?.label;  
     if (this.step === 5) this.userData.exercise = value?.label; 
     if (this.step === 6) this.userData.bestShape = value?.label; 
-    if (this.step === 7) this.userData.preferDay = value?.label; 
-    if (this.step === 8) this.userData.preferTime = value?.label; 
-    if (this.step === 9) this.userData.preferDayTime = value?.label;   
-    if (this.step === 10) this.userData.equipment = value?.label; 
+     if (this.step === 7){} 
+     if (this.step === 8){}
+    if (this.step === 9) this.userData.preferTime = value?.label; 
+    if (this.step === 10) this.userData.preferDayTime = value?.label;   
+    if (this.step === 11) this.userData.equipment = value?.label; 
 
     this.step++;
   }
@@ -90,6 +100,25 @@ step = 0;
   prevStep() {
     this.step--;
   }
+ 
+toggleDaySelection(dayLabel: string): void {
+    const index = this.userData.preferDay.indexOf(dayLabel);
+    if (index > -1) {
+      this.userData.preferDay.splice(index, 1); // Remove if selected
+    } else {
+      this.userData.preferDay.push(dayLabel); // Add if not selected
+    }
+  } 
+
+  toggleBodyPart(partLabel: string): void {
+  const index = this.userData.bodyParts.indexOf(partLabel);
+  if (index > -1) {
+    this.userData.bodyParts.splice(index, 1);
+  } else {
+    this.userData.bodyParts.push(partLabel);
+  }
+}
+
 
   isActualAgeValid(): boolean {
     const age = Number(this.userData.actualAge);
@@ -164,15 +193,20 @@ step = 0;
   }
 
   submitForm() {
-    console.log('Submitting user data:', this.userData);
-    this.quizService.submitQuizResponse(this.userData).subscribe({
-      next: () => {
-        this.route.navigate(['/auth/register']);
-      },
-      error: (err) => {
-        alert('Something went wrong during submission.');
-        console.error(err);
-      }
-    });
-  }
+  console.log('Submitting user data:', this.userData);
+  
+  this.quizService.submitQuizResponse(this.userData).subscribe({
+    next: (response) => {
+      const quizId = response.id; 
+      localStorage.setItem('quizId', quizId.toString()); 
+
+      this.route.navigate(['/auth/register']); 
+    },
+    error: (err) => {
+      alert('Something went wrong during submission.');
+      console.error(err);
+    }
+  });
+}
+
 }

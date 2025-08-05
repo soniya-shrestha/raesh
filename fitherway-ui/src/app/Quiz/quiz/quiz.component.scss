@@ -122,7 +122,86 @@
 
 .optionEquipment:hover {
   background-color: #FFCFB3;
+} 
+
+.day-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;  
+ 
 }
+
+.day-card {
+  padding: 10px;
+  border: 2px solid #e6e6e6;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s ease; 
+  color: #a25f55; 
+    font-size: 1.2rem;
+    font-weight: bold; 
+  margin: 12px 0;  
+
+
+
+
+  &.selected {
+    background-color: #FFCFB3;
+    color: #a25f55;
+    border-color: #FFCFB3;
+  }
+} 
+
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 12px;  
+  margin: 20px 0; 
+   
+} 
+
+.quiz-step{ 
+ 
+  h2{
+    color: #a25f55;
+  }
+}
+
+.option-body {
+  background: white;
+  border: 2px solid #e6e6e6;
+  border-radius: 16px;
+  padding: 16px 20px;
+  margin: 12px 0;
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  transition: all 0.3s ease;
+  color: #a25f55;  
+  font-weight: bold;
+
+  &:hover {
+    background-color: #ffd2ba;
+  }
+
+  &.selected {
+    border-color: #f7c4ad;
+    background-color: #f7c4ad;
+    color: #a25f55;
+  }
+}
+
+.navigation {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
 
 
 

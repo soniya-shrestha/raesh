@@ -1,1 +1,57 @@
-<p>workouts works!</p>
+<div class="board-list-container">
+  <div class="header-section">
+    <div class="header-text">
+      <h1>Workout Management</h1>
+    </div>
+    <button class="add-button" (click)="openWorkoutForm()">
+      Add workout
+    </button>
+  </div>
+  <hr>
+
+  <table class="workout-table">
+    <thead>
+      <tr>
+        <th>Workout Name</th>
+        <th>Goal</th>
+        <th>Level</th>
+        <th>BMI Level</th>
+        <th>Description</th>
+        <th>Video</th>
+        <th>Sets</th>
+        <th>Reps</th>
+        <th>Rest (sec)</th>
+        <th>Equipment Required</th>
+        <th>Equipment Type</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let workout of workouts">
+        <td>{{ workout.workoutName }}</td>
+        <td>{{ workout.goalType }}</td>
+        <td>{{ workout.difficulty }}</td>
+        <td>{{ workout.bmiLevel }}</td>
+        <td>{{ workout.description }}</td>
+      
+        <td>
+          <video width="100" controls [src]="workout.videoUrl"></video>
+        </td>
+        <td>{{ workout.sets }}</td>
+        <td>{{ workout.reps }}</td>
+        <td>{{ workout.restBetweenSetsInSeconds }}</td>
+        <td>{{ workout.equipmentRequired ? 'Yes' : 'No' }}</td>
+        <td>{{ workout.equipmentType || '-' }}</td>
+        <td class="actions-cell">
+          <div class="dropdown">
+            <button class="three-dots" (click)="toggleMenu(workout)">&#x22EE;</button>
+            <div class="dropdown-menu" *ngIf="selectedWorkout === workout">
+              <button (click)="onEdit(workout)">Edit</button>
+              <button (click)="onDelete(workout.id)">Delete</button>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

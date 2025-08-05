@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../service/auth.service';
+import { ToastService } from '../../service/toast.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -12,9 +13,11 @@ export class SignUpComponent {
 
   signupForm: FormGroup;
   profileImage: File | null = null;
-  previewUrl: string | null = null;
+  previewUrl: string | null = null; 
+  passwordVisible = false;        
+  confirmPasswordVisible = false;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router,  private toast: ToastService ) {
     this.signupForm = this.fb.group({
       username: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -59,8 +62,10 @@ export class SignUpComponent {
   }
 
   onSubmit() {
-    if (this.signupForm.invalid) {
-      this.signupForm.markAllAsTouched();
+    if (this.signupForm.invalid) { 
+      this.signupForm.markAllAsTouched(); 
+      this.toast.showError('Please fix form errors before submitting.');
+
       return;
     }
 
@@ -76,17 +81,26 @@ export class SignUpComponent {
 
     if (this.profileImage) {
       formData.append('profilePic', this.profileImage);
-    }
+    } 
+
+     const quizId = localStorage.getItem('quizId');
+  if (quizId) {
+    formData.append('quizId', quizId);
+  } else {
+      this.toast.showError('Quiz ID not found. Please take the quiz first.');
+    return;
+  }
 
     this.authService.registerStudent(formData).subscribe({
       next: (response) => {
         console.log('Registration successful', response); 
         localStorage.setItem('userEmail', formValues.email);
-        this.router.navigate(['/auth/otp-valid']); // or wherever you want to redirect
+        this.router.navigate(['/auth/otp-valid']); 
       },
       error: (error) => {
         console.error('Registration failed', error);
-        // Show error message
+        this.toast.showError(error.error?.message || 'Registration failed. Please try again.');
+
       }
     });
   }
