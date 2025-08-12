@@ -1,18 +1,37 @@
-<div *ngFor="let workout of weeklyRoutine; let i = index" class="day-section">
-  <h2>{{ workout.day }}</h2>
+<div class="day-section container mt-4">
+  <h2>Your Workouts For Today</h2>
 
-  <div class="exercise-row">
-    <div *ngFor="let exercise of workout.exercises; let j = index" class="exercise-card">
-      <img [src]="exercise.imageUrl" alt="{{ exercise.name }}" />
+  <div *ngIf="loading" class="text-center">
+    <p>Loading workouts...</p>
+  </div>
+
+  <div class="exercise-row" *ngIf="!loading && workouts.length">
+    <div class="exercise-card" *ngFor="let workout of workouts">
+      <video controls>
+        <source [src]="workout.workoutVideo" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+
       <div class="exercise-details">
-        <h3>{{ exercise.name }}</h3>
-        <p>Sets: {{ exercise.sets }}, Reps: {{ exercise.reps }}</p>
-        <p *ngIf="exercise.equipmentRequired">🏋 Requires Equipment</p>
-        <button (click)="toggleDone(i, j)" [class.done]="exercise.done">
-          {{ exercise.done ? '✅ Done' : 'Mark as Done' }}
-        </button>
+        <h3>{{ workout.workoutName }}</h3>
+        <p><strong>Sets:</strong> {{ workout.sets }}</p>
+        <p><strong>Reps:</strong> {{ workout.reps }}</p>
+        <p><strong>Rest:</strong> {{ workout.restBetweenSetsInSeconds }} sec</p>
+<button
+    [disabled]="workout.done"
+    [ngClass]="{ 'done': workout.done }"
+    (click)="markAsDone(workout)">
+    {{ workout.done ? 'Done' : 'Mark as Done' }}
+  </button>
+
+  <!-- <p *ngIf="workout.done" style="color: green; font-size: 0.85rem; margin-top: 0.5rem;">
+    Completed!
+  </p> -->
       </div>
     </div>
   </div>
-</div>
 
+  <div *ngIf="!loading && !workouts.length" class="text-center">
+    <p>No workouts found.</p>
+  </div>
+</div>

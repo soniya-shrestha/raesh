@@ -1,32 +1,27 @@
 <div class="container-fluid">
-  <div class="header px-3">
+  <div class="header px-3 d-flex justify-content-between align-items-center">
+    
     <div class="logo" routerLink="/" style="cursor: pointer;">  
       <!-- <img src="../../../../assets/logo/logo_sp.png"> -->  
-       <div class="logo">FitHerWay</div>
-
+      <div class="logo">FitHerWay</div>
     </div>
 
     <i class="fas fa-bars mobile-menu-icon" (click)="toggleSideNav()"></i>
 
-    <div class="profile">
-      <div class="bell-icon">
-        <span class="fas fa-bell"></span>
+    <div class="profile position-relative">
+      <div class="profile-image" (click)="toggleDropdown()">
+        <img [src]="profilePicture || 'assets/images/default-profile.png'" alt="Profile Picture" />
       </div>
-      <div class="dropdown">
-        <div class="profile-image" (click)="toggleDropdown()">
-          <img src="../../../../assets/images/profile.png" alt="Profile Picture">
+      <ul class="dropdown-menu text-small p-2" [class.show]="dropdownOpen">
+        <div>
+          <p class="my-2 fw-bold">{{ fullName }}</p>
         </div>
-        <ul class="dropdown-menu text-small p-2" [class.show]="dropdownOpen">
-          <div>
-            <p class="my-2 fw-bold">Aarju</p>
-          </div>
-          <div class="dropdown-divider"></div>
-          <li><p class="dropdown-item" routerLink="/">Home</p></li>
-          <li><p class="dropdown-item" (click)="onProfileClick()">Profile</p></li>
-          <li><p class="dropdown-item" (click)="onLogoutClick()">Logout</p></li>
-        </ul>
-        
-      </div>
+        <div class="dropdown-divider"></div>
+        <li><p class="dropdown-item" routerLink="/">Home</p></li>
+        <li><p class="dropdown-item" (click)="onProfileClick()">Profile</p></li>
+        <li><p class="dropdown-item" (click)="onLogoutClick()">Logout</p></li>
+      </ul>
     </div>
+
   </div>
 </div>

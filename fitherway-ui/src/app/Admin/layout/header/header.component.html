@@ -1,31 +1,39 @@
 <div class="container-fluid">
   <div class="header px-3">
-    <div class="logo" routerLink="/" style="cursor: pointer;">  
-      <!-- <img src="../../../../assets/logo/logo_sp.png"> -->  
-       <div class="logo">FitHerWay</div>
+    <div class="logo" routerLink="/" style="cursor: pointer;">
+      <!-- <img src="../../../../assets/logo/logo_sp.png"> -->
+      <div class="logo">FitHerWay</div>
 
     </div>
 
     <i class="fas fa-bars mobile-menu-icon" (click)="toggleSideNav()"></i>
 
     <div class="profile">
-      <div class="bell-icon">
-        <span class="fas fa-bell"></span>
-      </div>
+    
       <div class="dropdown">
+    
         <div class="profile-image" (click)="toggleDropdown()">
-          <img src="../../../../assets/images/profile.png" alt="Profile Picture">
+          <div class="initial-circle">{{ getInitial() }}</div>
         </div>
         <ul class="dropdown-menu text-small p-2" [class.show]="dropdownOpen">
           <div>
-            <p class="my-2 fw-bold"></p>
+            <p class="my-2 fw-bold">Admin</p> 
+           
           </div>
           <div class="dropdown-divider"></div>
-          <li><p class="dropdown-item" routerLink="/">Home</p></li>
-          <li><p class="dropdown-item" >Profile</p></li>
-          <li><p class="dropdown-item" (click)="onLogoutClick()">Logout</p></li>
+         
+
+          <li>
+            <p class="dropdown-item" routerLink="/">Home</p>
+          </li>
+          <li>
+            <p class="dropdown-item">Profile</p>
+          </li>
+          <li>
+            <p class="dropdown-item" (click)="onLogoutClick()">Logout</p>
+          </li>
         </ul>
-        
+
       </div>
     </div>
   </div>

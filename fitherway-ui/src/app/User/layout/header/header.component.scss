@@ -81,11 +81,35 @@
 }
 
 .profile p {
-  margin: 0 0 0;
+  margin: 0 0 0;  
+  color: #a25f55;
 }
 
-.dropdown-menu p {
-  cursor: pointer;
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 1000;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  min-width: 160px;
+
+  &.show {
+    display: block;
+  }
+
+  p {
+    margin: 0;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background 0.2s;
+
+    &:hover {
+      background-color: #f0f0f0;
+    }
+  }
 }
 
 @media (min-width: 768px) {

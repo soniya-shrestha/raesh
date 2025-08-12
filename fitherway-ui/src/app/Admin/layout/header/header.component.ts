@@ -7,9 +7,9 @@ import { Router } from '@angular/router';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-fullName: any;
-  dropdownOpen = false;
 
+  dropdownOpen = false;
+ userName: string = 'Admin';
 
   constructor(
     private router: Router
@@ -18,6 +18,9 @@ fullName: any;
   ngOnInit() {
   }
 
+getInitial(): string {
+  return this.userName ? this.userName.charAt(0).toUpperCase() : '';
+}
 
 toggleDropdown(): void {
   this.dropdownOpen = !this.dropdownOpen;

@@ -28,5 +28,10 @@ export class AuthService {
    otp(data: { otp: string, email: string }): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/users/validate`, data);
   }
-
+ 
+  changePassword(data: {  oldPassword: string;
+  newPassword: string;
+  confirmNewPassword: string;}): Observable<any>{
+    return this.http.post<any>(`${this.baseUrl}/users/change-password`,data);
+  }
 }

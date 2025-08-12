@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environment/environment';
@@ -30,7 +30,13 @@ export class AdminService {
       return this.http.delete<any>(`${this.baseUrl}/workouts/${id}`);
   }  
 
-  getWorkoutById(id: number){} 
+  // getWorkoutById(id: number):Observable<any> {
+  //     return this.http.get<any>(`${this.baseUrl}/workouts/getById/?id=${id}`);
+  // }    
+  getWorkoutById(id: number): Observable<any> {
+  const params = new HttpParams().set('id', id.toString());
+  return this.http.get<any>(`${this.baseUrl}/workouts/getById`, { params });
+}
 
   updateWorkout(id: number, formData: FormData):Observable<any> {
       return this.http.put<any>(`${this.baseUrl}/workouts/${id}`, formData);
@@ -57,7 +63,9 @@ export class AdminService {
     return this.http.delete<void>(`${this.baseUrl}/nutrition/${id}`);
   } 
 
-  
+  getAllUsers() :Observable<any> {
+      return this.http.get<any>(`${this.baseUrl}/users/getAll`);
+  } 
 
 
 }

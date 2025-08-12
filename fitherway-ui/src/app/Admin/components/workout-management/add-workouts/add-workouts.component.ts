@@ -14,7 +14,12 @@ export class AddWorkoutsComponent implements OnInit {
   workoutVideo: File | null = null;
   showEquipmentType = false;
 
-  goals = ['Loss weight', 'Build Muscle', 'General Fitness']; // sample dropdown
+  goals = ['Lose weight', 'Build Muscle', 'General Fitness'];  
+  muscles = ['Chest', 'Back', 'Arms', 'Legs', 'Shoulders', 'Core'];
+  tags = ['Sun', 'Mon', 'Tue', 'Wed', 'Thurs', 'Fri', 'Sat'];// sample dropdown 
+
+selectedMuscles: string[] = [];
+selectedTags: string[] = [];
 
   constructor(private fb: FormBuilder, private adminService: AdminService, private router: Router) { }
 
@@ -37,8 +42,8 @@ export class AddWorkoutsComponent implements OnInit {
       sets: [0, [Validators.required, Validators.min(1)]],
       restBetweenSetsInSeconds: [0, [Validators.required, Validators.min(0)]],
       caloriesBurnedEstimate: [0, [Validators.required, Validators.min(0)]],
-      targetedMuscles: ['', Validators.required],
-      tags: ['', Validators.required],
+      targetedMuscles: [[], Validators.required],
+      tags: [[], Validators.required],
       bmiLevel: ['', Validators.required]
 
     });
@@ -60,7 +65,40 @@ export class AddWorkoutsComponent implements OnInit {
     if (file) {
       this.workoutVideo = file;
     }
-  }
+  } 
+
+onMuscleCheckboxChange(event: Event) {
+  const checkbox = event.target as HTMLInputElement;
+  const value = checkbox.value;
+
+  if (checkbox.checked) {
+    if (!this.selectedMuscles.includes(value)) {
+      // Create a new array reference to trigger Angular change detection properly
+      this.selectedMuscles = [...this.selectedMuscles, value];
+    }
+  } else {
+    this.selectedMuscles = this.selectedMuscles.filter(m => m !== value);
+  } 
+  this.workoutForm.get('targetedMuscles')?.setValue(this.selectedMuscles);
+  this.workoutForm.get('targetedMuscles')?.markAsDirty();
+  this.workoutForm.get('targetedMuscles')?.updateValueAndValidity();
+}
+
+onTagCheckboxChange(event: Event) {
+  const checkbox = event.target as HTMLInputElement;
+  const value = checkbox.value;
+
+  if (checkbox.checked) {
+    if (!this.selectedTags.includes(value)) {
+      this.selectedTags = [...this.selectedTags, value];
+    }
+  } else {
+    this.selectedTags = this.selectedTags.filter(t => t !== value);
+  } 
+    this.workoutForm.get('tags')?.setValue(this.selectedTags);
+  this.workoutForm.get('tags')?.markAsDirty();
+  this.workoutForm.get('tags')?.updateValueAndValidity();
+}
 
   onSubmit() {
     if (this.workoutForm.invalid) {
@@ -85,8 +123,8 @@ export class AddWorkoutsComponent implements OnInit {
     formData.append('restBetweenSetsInSeconds', formValues.restBetweenSetsInSeconds.toString());
     formData.append('caloriesBurnedEstimate', formValues.caloriesBurnedEstimate.toString());
 
-    formData.append('targetedMuscles', JSON.stringify(formValues.targetedMuscles.split(','))); // ✅ as array
-    formData.append('tags', JSON.stringify(formValues.tags.split(',')));
+formData.append('targetedMuscles', JSON.stringify(formValues.targetedMuscles));
+formData.append('tags', JSON.stringify(formValues.tags));
     formData.append('bmiLevel', formValues.bmiLevel);
 
 
@@ -98,7 +136,8 @@ export class AddWorkoutsComponent implements OnInit {
       next: (res) => {
         console.log('Workout added:', res);
         this.workoutForm.reset();
-        this.workoutVideo = null;
+        this.workoutVideo = null; 
+        this.router.navigate(['/admin/workout']);
       },
       error: (err) => {
         console.error('Error adding workout:', err);

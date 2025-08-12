@@ -1,6 +1,4 @@
-<!-- admin-dashboard.component.html -->
 <div class="dashboard-container">
-  
   <!-- Main Content -->
   <main class="main">
     <h2 class="welcome">Welcome, Admin</h2>
@@ -9,26 +7,30 @@
     <div class="stats">
       <div class="card">
         <p class="label">Total Users</p>
-        <p class="value">1,234</p>
+        <p class="value">{{ totalUsers }}</p>
       </div>
       <div class="card">
         <p class="label">Active Users</p>
-        <p class="value">320</p>
+        <p class="value">{{ activeUsers }}</p>
       </div>
       <div class="card">
         <p class="label">Nutrition Diet</p>
-        <p class="value">12</p>
+        <p class="value">{{ nutritionCount }}</p>
       </div>
       <div class="card">
         <p class="label">Workouts</p>
-        <p class="value">56</p>
+        <p class="value">{{ workoutCount }}</p>
       </div>
     </div>
 
-    <!-- Chart Placeholder -->
-    <div class="chart">
-      <h3>User Growth</h3>
-      <canvas baseChart chartType="bar"></canvas>
-    </div>
+    <!-- Chart -->
+   <div class="chart">
+  <h3>User Growth</h3>
+  <canvas baseChart
+          [data]="chartData"
+          [options]="chartOptions"
+          [type]="'line'">
+  </canvas>
+</div>
   </main>
 </div>

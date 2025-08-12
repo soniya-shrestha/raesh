@@ -13,6 +13,7 @@ import { ProgressComponent } from './components/progress/progress.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { NutritionComponent } from './components/nutrition/nutrition.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
+import { NgChartsModule } from 'ng2-charts';
 
 
 
@@ -38,7 +39,8 @@ import { CalendarComponent } from './components/calendar/calendar.component';
     UserRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
+    NgChartsModule
   ]
 })
 export class UserModule { }

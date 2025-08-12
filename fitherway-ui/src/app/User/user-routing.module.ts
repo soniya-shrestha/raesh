@@ -24,11 +24,7 @@ const routes: Routes = [
 
       // Nutrition
       { path: 'nutrition', component: NutritionComponent },
-      // { path: 'assignment/add', component: AddAssignmentsComponent },
-
-      // //Exam
-      // { path: 'exam', component: ExamsComponent },
-      // { path: 'exam/add', component: AddExamsComponent },
+      
 
       //User Profile
       { path: 'profile', component: ProfileComponent },

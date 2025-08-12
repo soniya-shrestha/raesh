@@ -51,7 +51,13 @@
         width: 100%;
         max-height: 250px;
         object-fit: contain;
-      }
+      } 
+      .progress-graph-container {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
 
       .today-overview {
         .circle-progress {

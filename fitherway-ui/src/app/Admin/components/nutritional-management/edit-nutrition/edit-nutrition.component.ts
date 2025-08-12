@@ -86,7 +86,7 @@ export class EditNutritionComponent implements OnInit {
     this.nutritionService.update(this.planId, formData).subscribe({
       next: () => {
         alert('Nutrition Plan updated successfully!');
-        this.router.navigate(['/admin/nutrition/list']);
+        this.router.navigate(['/admin/nutrition']);
       },
       error: (err) => {
         console.error('Update failed', err);

@@ -6,7 +6,10 @@ import { Router } from '@angular/router';
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent implements OnInit { 
+
+  sidebarVisible = true;
+
   constructor(private router: Router) { }
 
   ngOnInit(): void { }
@@ -29,7 +32,12 @@ export class SidebarComponent implements OnInit {
     if (menu.submenu) {
       menu.open = !menu.open;
     }
-  }
+  } 
+
+  
+toggleSideNav() {
+  this.sidebarVisible = !this.sidebarVisible;
+}
 
   menus: Array<any> = [
     {
@@ -55,16 +63,16 @@ export class SidebarComponent implements OnInit {
       url: '/admin/nutrition',
       icon: 'fas fa-chart-line'
     },
-    {
-      title: 'Report',
-      url: '/admin/report',
-      icon: 'fas fa-file-alt'
-    },
-    {
-      title: 'Settings',
-      url: '/admin/settings',
-      icon: 'fas fa-file-alt'
-    },
+    // {
+    //   title: 'Report',
+    //   url: '/admin/report',
+    //   icon: 'fas fa-file-alt'
+    // },
+    // {
+    //   title: 'Settings',
+    //   url: '/admin/settings',
+    //   icon: 'fas fa-file-alt'
+    // },
   ];
   
 }

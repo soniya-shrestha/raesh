@@ -10,12 +10,13 @@ h2{
   form {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1.5rem; 
 
     .row {
       display: flex;
       gap: 1rem;
-      flex-wrap: wrap;
+      flex-wrap: wrap; 
+
 
       .col {
         flex: 1;
@@ -32,8 +33,36 @@ h2{
           padding: 0.6rem;
           border: 1px solid #ccc;
           border-radius: 0.5rem;
-          background-color: #fff7f0;
-        }
+          // background-color: #fff7f0; 
+          color: #a25f55;
+        } 
+
+        .dropdown-toggle {
+    padding: 0.6rem;
+    border-radius: 0.5rem;
+    border: 1px solid #ccc;
+    background-color: #fff7f0;
+    color: #a25f55;
+    text-align: left;
+    width: 100%;
+
+    &:after {
+      float: right;
+      margin-top: 6px;
+      border-top: 0.3em solid;
+      border-right: 0.3em solid transparent;
+      border-left: 0.3em solid transparent;
+      content: "";
+    }
+  }
+
+  .dropdown-menu {
+    border-radius: 0.5rem;
+    border: 1px solid #ccc;
+    max-height: 250px;
+    overflow-y: auto;
+    padding: 0.75rem 1rem;
+  }
       }
     }
 

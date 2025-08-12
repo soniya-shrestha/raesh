@@ -29,9 +29,10 @@
         <td>{{ plan.goalType }}</td>
         <td>{{ plan.status ? 'Active' : 'Inactive' }}</td>
         <td>
-  <a *ngIf="plan.imageUrl" [href]="plan.imageUrl" target="_blank">{{ plan.imageUrl }}</a>
-  <span *ngIf="!plan.imageUrl">-</span>
-</td>
+          <img *ngIf="plan.imageUrl" [src]="plan.imageUrl" class="plan-image" />
+          <span *ngIf="!plan.imageUrl">-</span>
+        </td>
+
         <td class="actions-cell">
           <div class="dropdown">
             <button class="three-dots" (click)="toggleMenu(plan)">&#x22EE;</button>

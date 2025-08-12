@@ -27,7 +27,7 @@ const routes: Routes = [
 
       { path: 'add-workout', component: AddWorkoutsComponent },
 
-      // { path: 'edit-workout/:id', component: EditWorkoutsComponent}, 
+      { path: 'edit-workout/:id', component: EditWorkoutsComponent}, 
 
 
       //nutrition

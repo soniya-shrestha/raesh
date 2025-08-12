@@ -54,11 +54,11 @@ export class SidebarComponent implements OnInit {
       url: '/user/progress',
       icon: 'fas fa-chart-line'
     },
-    {
-      title: 'Settings',
-      url: '/user/settings',
-      icon: 'fas fa-file-alt'
-    },
+    // {
+    //   title: 'Settings',
+    //   url: '/user/settings',
+    //   icon: 'fas fa-file-alt'
+    // },
   ];
   
 }

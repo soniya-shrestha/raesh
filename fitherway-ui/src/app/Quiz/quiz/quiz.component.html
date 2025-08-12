@@ -143,9 +143,6 @@
       placeholder="Age"
     />
   </div>
-  <!-- <div class="text-danger"  *ngIf="!isActualAgeValid() && userData.actualAge">
-    Age must be between 10 and 99.
-  </div> -->
   <button class="btn next-btn" [disabled]="!isActualAgeValid()" (click)="nextStep()">Next</button>
 </div>
 

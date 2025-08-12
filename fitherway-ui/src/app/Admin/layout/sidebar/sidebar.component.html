@@ -1,4 +1,6 @@
-<div id="sidebar" class="side-navbar d-flex flex-column">
+<div id="sidebar" 
+     class="side-navbar d-flex flex-column"
+     [ngClass]="{ 'sidebar-collapsed': !sidebarVisible }">
     <div class="menus mt-4">
         <ul class="menu-items">
             <li class="menu-item" *ngFor="let m of menus">

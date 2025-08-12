@@ -14,6 +14,8 @@ import { EditWorkoutsComponent } from './components/workout-management/edit-work
 import { AddNutritionComponent } from './components/nutritional-management/add-nutrition/add-nutrition.component';
 import { NutritionPlansComponent } from './components/nutritional-management/nutrition-plans/nutrition-plans.component';
 import { EditNutritionComponent } from './components/nutritional-management/edit-nutrition/edit-nutrition.component';
+import { UsersComponent } from './components/user-management/users/users.component';
+import { NgChartsModule } from 'ng2-charts';
 
 
 
@@ -31,14 +33,16 @@ import { EditNutritionComponent } from './components/nutritional-management/edit
     EditWorkoutsComponent,
     AddNutritionComponent,
    NutritionPlansComponent,
-   EditNutritionComponent
+   EditNutritionComponent,
+   UsersComponent
    
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     FormsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule, 
+    NgChartsModule,
   ]
 })
 export class AdminModule { }

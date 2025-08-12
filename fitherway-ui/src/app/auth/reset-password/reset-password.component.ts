@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../service/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-reset-password',
@@ -7,25 +9,43 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrl: './reset-password.component.scss'
 })
 export class ResetPasswordComponent {
-  changeForm: FormGroup;
-  errorMessage: string = '';
+ changeForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private userService: AuthService,
+    private toastr: ToastrService
+  ) {
     this.changeForm = this.fb.group({
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', [Validators.required]]
+      oldPassword: ['', [Validators.required]],
+      newPassword: ['', [Validators.required, Validators.minLength(6)]],
+      confirmNewPassword: ['', [Validators.required]]
     });
   }
 
   onSubmit() {
-    if (this.changeForm.valid) {
-      const { password, confirmPassword } = this.changeForm.value;
-      if (password === confirmPassword) {
-        console.log('Password changed to:', password);
-        // Replace with API call
-      } else {
-        this.errorMessage = 'Passwords do not match';
-      }
+    const { oldPassword, newPassword, confirmNewPassword } = this.changeForm.value;
+
+    if (newPassword !== confirmNewPassword) {
+      this.toastr.error('New passwords do not match', 'Validation Error');
+      return;
     }
+
+    const requestBody = {
+      oldPassword,
+      newPassword,
+      confirmNewPassword
+    };
+
+    this.userService.changePassword(requestBody).subscribe({
+      next: () => {
+        this.toastr.success('Password changed successfully!', 'Success');
+        this.changeForm.reset();
+      },
+      error: (err) => {
+        const message = err.error?.message || 'Something went wrong.';
+        this.toastr.error(message, 'Error');
+      }
+    });
   }
 }

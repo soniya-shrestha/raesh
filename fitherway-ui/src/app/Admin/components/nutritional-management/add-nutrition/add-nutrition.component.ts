@@ -66,7 +66,7 @@ export class AddNutritionComponent implements OnInit {
       next: () => {
         this.planForm.reset();
         this.imageFile = null;
-        this.router.navigate(['/admin/nutrition/list']);
+        this.router.navigate(['/admin/nutrition']);
       },
       error: (err) => {
         console.error('Error creating nutrition plan:', err);

@@ -1,0 +1,58 @@
+.progress-wrapper {
+  background-color: #FDFAF6;
+  padding: 0.5rem;
+  border-radius: 1.5rem;
+  max-width: 1000px;
+  margin: 1rem auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+  text-align: left;
+
+  h2 {
+    color: #a25f55;
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+  }
+}
+
+.chart-container {
+  height: 380px;
+  width: 100%;
+  padding: 1rem;
+}
+
+.summary {
+  margin-top: 2rem;
+  font-size: 1.1rem;
+  color: #333;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+
+  p {
+    margin: 0;
+    font-weight: 500;
+  }
+
+  strong {
+    color: #a25f55;
+  }
+} 
+
+.motivation-message {
+  background-color: #fff7ed;
+  border-left: 5px solid #a25f55;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 1rem;
+  font-size: 1.1rem;
+  color: #a25f55;
+  font-weight: 500;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+

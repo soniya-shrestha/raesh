@@ -10,6 +10,7 @@ import { AuthInterceptor } from './core/AuthInterceptor';
 import { RouterModule } from '@angular/router';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule, 
-    RouterModule, 
+    RouterModule,  
+    NgChartsModule,
     BrowserAnimationsModule,
    ToastrModule.forRoot({ 
       timeOut: 3000,

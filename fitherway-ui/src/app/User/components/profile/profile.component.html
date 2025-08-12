@@ -1,1 +1,20 @@
-<p>profile works!</p>
+<div class="profile-container">
+  <!-- Back button -->
+  <button class="back-btn" (click)="goBack()">
+    ← Back
+  </button>
+
+
+<div class="profile-card" *ngIf="user">
+  <div class="profile-image">
+    <img [src]="user.profilePicture" alt="Profile Picture" />
+  </div>
+  <div class="profile-details">
+    <h2>{{ user.userName }}</h2>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Phone:</strong> {{ user.phoneNumber }}</p>
+    <p><strong>Address:</strong> {{ user.address }}</p>
+    <p><strong>Role:</strong> {{ user.userRole[0]?.role }}</p>
+  </div>
+</div>
+</div>
