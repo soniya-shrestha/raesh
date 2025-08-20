@@ -43,8 +43,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                         || request.getRequestURI().startsWith("/api/v1/users/set-password")
                         || request.getRequestURI().startsWith("/api/v1/quiz/")
 
-
-
         ) {
             filterChain.doFilter(request, response);
             return;

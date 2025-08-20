@@ -2,16 +2,15 @@ package com.example.fitHerWay.users.entity;
 
 
 import com.example.fitHerWay.global.Auditable;
+import com.example.fitHerWay.quizsurvey.entity.UserQuizResponse;
 import com.example.fitHerWay.role.entity.Role;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
 @Builder
@@ -49,6 +48,10 @@ import java.util.List;
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private List<Role> role;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<UserQuizResponse> quizResponses;
+
 
     private Boolean isActive = true;
     private Boolean isDeleted = false;

@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UsersRegistrationRequest {
+public class UpdateUserRequest {
     @NotEmpty(message = "User Name must not be empty")
     private String userName;
 
@@ -26,9 +26,4 @@ public class UsersRegistrationRequest {
 
     @NotEmpty(message = "Address must not be empty")
     private String address;
-
-    @NotEmpty(message = "Password must not be empty")
-    private String password;
-
-    private Long quizId;
 }

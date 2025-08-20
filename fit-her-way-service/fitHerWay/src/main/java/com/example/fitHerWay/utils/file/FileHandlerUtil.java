@@ -46,21 +46,77 @@ public class FileHandlerUtil {
 
         log.info("[FileHandlerUtil:saveFile] Saving file: {} to {}", uniqueFileName, fullPath);
 
-        String fileDimension = getFileDimension(file);
-
         try {
             Files.createDirectories(fullPath.getParent());
             file.transferTo(fullPath.toFile());
 
             FileType fileType = determineFileType(originalFilename);
+            String metadata = null;
+
+            // Handle image and video files
+            if (fileType == FileType.IMAGE) {
+                metadata = getFileDimension(file); // Get image dimensions
+            } else if (fileType == FileType.VIDEO) {
+                metadata = extractVideoMetadata(fullPath); // Extract video metadata
+            } else {
+                throw new IllegalArgumentException("Unsupported file type");
+            }
+
             log.info("[FileHandlerUtil:saveFile] File saved at: {}", fullPath);
 
-            return new FileSaveResponse(uniqueFileName, relativePath, fileType, fileDimension);
+            return new FileSaveResponse(uniqueFileName, relativePath, fileType, metadata);
         } catch (IOException e) {
             log.error("[FileHandlerUtil:saveFile] Error saving file: {}", e.getMessage());
-            return new FileSaveResponse(uniqueFileName, relativePath, null, fileDimension);
+            return new FileSaveResponse(uniqueFileName, relativePath, null, null);
         }
     }
+
+    private String extractVideoMetadata(Path videoPath) {
+        // Placeholder for video metadata extraction logic
+        // Use a library like FFmpeg to extract metadata
+        return "Resolution: 1920x1080, Duration: 5 minutes";
+    }
+
+//    public FileSaveResponse saveFile(MultipartFile file, String additionalPath) {
+//        if (file == null || file.isEmpty()) {
+//            throw new IllegalArgumentException("Invalid file");
+//        }
+//
+//        String originalFilename = file.getOriginalFilename();
+//        if (originalFilename == null || originalFilename.isBlank()) {
+//            throw new IllegalArgumentException("Invalid file name");
+//        }
+//
+//        // Clean and generate unique file name
+//        String baseName = getBaseName(originalFilename);
+//        String extension = getFileExtension(originalFilename);
+//        String cleanedName = cleanFileName(baseName);
+//        String uniqueFileName = cleanedName + "-" + System.currentTimeMillis() + "." + extension;
+//
+//        // Prepare relative and full path
+//        String relativePath = (additionalPath != null && !additionalPath.isBlank())
+//                ? additionalPath + "/" + uniqueFileName
+//                : uniqueFileName;
+//        String basePath = fileConfig.getFilePath();
+//        Path fullPath = Paths.get(basePath, relativePath);
+//
+//        log.info("[FileHandlerUtil:saveFile] Saving file: {} to {}", uniqueFileName, fullPath);
+//
+//        String fileDimension = getFileDimension(file);
+//
+//        try {
+//            Files.createDirectories(fullPath.getParent());
+//            file.transferTo(fullPath.toFile());
+//
+//            FileType fileType = determineFileType(originalFilename);
+//            log.info("[FileHandlerUtil:saveFile] File saved at: {}", fullPath);
+//
+//            return new FileSaveResponse(uniqueFileName, relativePath, fileType, fileDimension);
+//        } catch (IOException e) {
+//            log.error("[FileHandlerUtil:saveFile] Error saving file: {}", e.getMessage());
+//            return new FileSaveResponse(uniqueFileName, relativePath, null, fileDimension);
+//        }
+//    }
 
     public FileType determineFileType(String fileName) {
         String extension = fileName.contains(".") ? fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase() : "";

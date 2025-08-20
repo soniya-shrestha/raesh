@@ -6,6 +6,11 @@ server:
 #    base-url: http://localhost:8483/fitherway-service/api
 
 spring:
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 100MB
   application:
     name: fitherway
 
@@ -37,6 +42,7 @@ app:
     windows: C:\\fit_her_way\\
     linux: /home/user/fit_her_way/
     mac: /Users/fit_her_way/
+
 
 otp:
   length: 6         # Length of OTP
